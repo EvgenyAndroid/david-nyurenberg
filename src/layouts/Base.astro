@@ -1,0 +1,109 @@
+---
+import '../styles/global.css';
+
+interface Props {
+  title: string;
+  description?: string;
+  ogImage?: string;
+}
+
+const {
+  title,
+  description = 'David Nyurenberg — selected bylines, essays, and published work.',
+  ogImage = '/og-default.png',
+} = Astro.props;
+
+const fullTitle = title === 'David Nyurenberg' ? title : `${title} — David Nyurenberg`;
+const canonicalUrl = new URL(Astro.url.pathname, Astro.site).toString();
+const absoluteOgImage = new URL(ogImage, Astro.site).toString();
+---
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{fullTitle}</title>
+    <meta name="description" content={description} />
+    <meta name="generator" content={Astro.generator} />
+    <meta name="author" content="David Nyurenberg" />
+    <meta name="theme-color" content="#fafaf7" />
+
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="canonical" href={canonicalUrl} />
+
+    <!-- Open Graph -->
+    <meta property="og:title" content={fullTitle} />
+    <meta property="og:description" content={description} />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content={canonicalUrl} />
+    <meta property="og:site_name" content="David Nyurenberg" />
+    <meta property="og:image" content={absoluteOgImage} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:locale" content="en_US" />
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={fullTitle} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={absoluteOgImage} />
+  </head>
+  <body>
+    <a id="top" tabindex="-1" aria-hidden="true"></a>
+    <main><slot /></main>
+
+    <footer class="footer">
+      <div class="footer__inner">
+        <div>
+          <div class="footer__brand">David Nyurenberg</div>
+          <div class="footer__tagline">Selected bylines and published work.</div>
+          <div class="footer__copy">
+            © {new Date().getFullYear()} David Nyurenberg. All rights reserved.
+          </div>
+        </div>
+      </div>
+    </footer>
+
+    <!-- Back-to-top -->
+    <a href="#top" class="to-top" aria-label="Back to top" data-to-top hidden>
+      <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+        <polyline points="6 14 12 8 18 14" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+      <span class="to-top__label">Top</span>
+    </a>
+
+    <script is:inline>
+      (function () {
+        var btn = document.querySelector('[data-to-top]');
+        if (!btn) return;
+        var threshold = 400;
+        var ticking = false;
+        function update() {
+          var y = window.pageYOffset || document.documentElement.scrollTop;
+          if (y > threshold) {
+            btn.hidden = false;
+            btn.classList.add('is-visible');
+          } else {
+            btn.classList.remove('is-visible');
+            window.setTimeout(function () {
+              var y2 = window.pageYOffset || document.documentElement.scrollTop;
+              if (y2 <= threshold) btn.hidden = true;
+            }, 220);
+          }
+          ticking = false;
+        }
+        window.addEventListener('scroll', function () {
+          if (!ticking) { window.requestAnimationFrame(update); ticking = true; }
+        }, { passive: true });
+        btn.addEventListener('click', function (e) {
+          e.preventDefault();
+          window.scrollTo({ top: 0, behavior: 'smooth' });
+          if (window.history && window.history.replaceState) {
+            window.history.replaceState(null, '', window.location.pathname + window.location.search);
+          }
+        });
+        update();
+      })();
+    </script>
+  </body>
+</html>
