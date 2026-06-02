@@ -119,9 +119,24 @@ main { display: block; }
   padding: 5rem 0 3rem;
   border-bottom: 1px solid var(--rule);
 }
+/* Hero role line — current professional position, sits between H1 and sub */
+.hero__role {
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-size: var(--t-lg);
+  color: var(--ink);
+  margin: 0 0 0.75rem;
+  letter-spacing: -0.01em;
+}
+.hero__role strong {
+  font-style: normal;
+  color: var(--accent);
+  font-weight: 600;
+}
+
 .hero__sub {
   font-size: var(--t-md);
-  max-width: 50ch;
+  max-width: 56ch;
   color: var(--ink-muted);
   margin: 1rem 0 0;
 }
@@ -296,8 +311,40 @@ main { display: block; }
   font-weight: 600;
   color: var(--accent);
   margin-bottom: 0.5rem;
+  display: flex;
+  align-items: baseline;
+  flex-wrap: wrap;
+  gap: 0;
 }
 .bib-sep { margin: 0 0.5em; opacity: 0.5; }
+
+/* Type tag — small accent-filled pill that distinguishes Interview /
+ * Quoted / Authored / Podcast / Press Release / Feature / Video Interview.
+ * Color variants below give each kind its own visual hint. */
+.bib-type {
+  display: inline-block;
+  padding: 0.18rem 0.55rem;
+  background: var(--paper-2);
+  color: var(--accent);
+  border-radius: 3px;
+  font-size: 0.68rem;
+  letter-spacing: 0.12em;
+  font-weight: 700;
+  margin-right: 0.5em;
+}
+/* Authored & Feature = stronger visual weight (David's own writing) */
+.bib-type--authored,
+.bib-type--feature {
+  background: var(--accent);
+  color: var(--paper);
+}
+/* Press Release = neutral / muted */
+.bib-type--press-release,
+.bib-type--mention {
+  background: transparent;
+  border: 1px solid var(--rule);
+  color: var(--ink-muted);
+}
 .bib-title {
   font-family: var(--font-serif);
   font-size: var(--t-lg);
@@ -331,6 +378,42 @@ main { display: block; }
   opacity: 0.5;
   transition: transform 0.18s ease, opacity 0.18s ease;
   display: inline-block;
+}
+
+/* LinkedIn activity note — appended below the bibliography list */
+.linkedin-note {
+  margin: 3rem 0 0;
+  padding: 1.5rem 1.75rem;
+  background: var(--paper-2);
+  border-left: 3px solid var(--accent);
+  border-radius: 2px;
+}
+.linkedin-note p {
+  margin: 0;
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-size: var(--t-base);
+  color: var(--ink-muted);
+  line-height: 1.55;
+  max-width: 60ch;
+}
+.linkedin-note strong {
+  font-style: normal;
+  color: var(--ink);
+  font-weight: 600;
+}
+.linkedin-note a {
+  font-style: normal;
+  font-family: var(--font-sans);
+  font-size: var(--t-sm);
+  font-weight: 600;
+  color: var(--accent);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  border-bottom-color: rgba(46, 58, 74, 0.4);
+}
+.linkedin-note a:hover {
+  border-bottom-color: var(--accent);
 }
 
 /* ─── Footer ────────────────────────────────────────────────────────── */
