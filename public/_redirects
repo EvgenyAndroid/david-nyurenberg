@@ -1,3 +1,4 @@
 # /future was the redesign preview; it became the home page on 2026-10-09.
-/future      /          301
-/future/*    /:splat    301
+# 302 (temporary) while the redesign may still be reverted.
+/future      /          302
+/future/*    /:splat    302
