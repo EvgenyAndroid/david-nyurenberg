@@ -10,5 +10,6 @@ export default defineConfig({
   build: {
     format: 'directory',
   },
-  integrations: [sitemap()],
+  // /future is an unlisted redesign preview: keep it out of the sitemap.
+  integrations: [sitemap({ filter: page => !page.includes('/future') })],
 });

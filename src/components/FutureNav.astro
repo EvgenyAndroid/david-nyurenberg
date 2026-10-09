@@ -1,0 +1,19 @@
+---
+import { ideas } from '../data/ideas';
+const { current = '' } = Astro.props as { current?: string };
+---
+<nav class="fnav" aria-label="Site">
+  <div class="shell fnav__inner">
+    <a href="/future/" class="fnav__brand">David Nyurenberg<span class="dot">.</span></a>
+    <ul class="fnav__links">
+      {ideas.map(i => (
+        <li>
+          <a href={`/future/ideas/${i.slug}/`} aria-current={current === i.slug ? 'page' : undefined}>
+            <span class="fnav__num">{i.num}</span>{i.title.replace(/\.$/, '')}
+          </a>
+        </li>
+      ))}
+      <li><a href="/" class="fnav__archive">Archive</a></li>
+    </ul>
+  </div>
+</nav>

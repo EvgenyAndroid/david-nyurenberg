@@ -1,0 +1,91 @@
+---
+import Base from '../../../layouts/Base.astro';
+import FutureNav from '../../../components/FutureNav.astro';
+import EvidenceItem from '../../../components/EvidenceItem.astro';
+import publications from '../../../data/publications.json';
+import { ideas, type Idea, type Theme } from '../../../data/ideas';
+import '../../../styles/future.css';
+
+export function getStaticPaths() {
+  return ideas.map(idea => ({ params: { slug: idea.slug }, props: { idea } }));
+}
+const { idea } = Astro.props as { idea: Idea };
+
+type Entry = { date: string; venue: string; title: string; type?: string; themes?: Theme[] };
+// Oldest first: the trail shows how the argument developed.
+const trail = (publications as Entry[])
+  .filter(e => e.themes?.includes(idea.theme))
+  .sort((a, b) => a.date.localeCompare(b.date));
+const authored = trail.filter(e => e.type === 'Authored').length;
+const since = trail[0]?.date.slice(0, 4);
+
+const idx = ideas.findIndex(i => i.slug === idea.slug);
+const next = ideas[(idx + 1) % ideas.length];
+const prev = ideas[(idx - 1 + ideas.length) % ideas.length];
+---
+<Base title={idea.title.replace(/\.$/, '')} noindex description={idea.thesis}>
+  <FutureNav current={idea.slug} />
+
+  <header class={`ihero ihero--${idea.theme}`}>
+    <div class="shell">
+      <a class="ihero__back" href="/future/">← Four arguments</a>
+      <span class="ihero__num">{idea.num}</span>
+      <h1 class="ihero__title">{idea.title}</h1>
+      <p class="ihero__thesis">{idea.thesis}</p>
+      <p class="ihero__stats">
+        <strong>{trail.length}</strong> pieces · <strong>{authored}</strong> authored · argued since <strong>{since}</strong>
+      </p>
+    </div>
+  </header>
+
+  <section class="fsection">
+    <div class="shell idea">
+      <div class="idea__argument">
+        <h2 class="fsection__label">The argument</h2>
+        {idea.argument.map(p => <p>{p}</p>)}
+      </div>
+      <aside class="idea__side">
+        {idea.quotes.map(q => (
+          <figure class={`quote quote--${idea.theme}`}>
+            <blockquote>“{q.text}”</blockquote>
+            <figcaption><a href={q.url} target="_blank" rel="noopener">{q.source}</a></figcaption>
+          </figure>
+        ))}
+      </aside>
+    </div>
+  </section>
+
+  {idea.numbers.length > 0 && (
+    <section class="fsection fsection--tint">
+      <div class="shell">
+        <h2 class="fsection__label">By the numbers</h2>
+        <div class="numbers">
+          {idea.numbers.map(n => (
+            <a class="number" href={n.url} target="_blank" rel="noopener">
+              <span class="number__value">{n.value}</span>
+              <span class="number__label">{n.label}</span>
+              <span class="number__src">{n.source} ↗</span>
+            </a>
+          ))}
+        </div>
+      </div>
+    </section>
+  )}
+
+  <section class="fsection">
+    <div class="shell">
+      <div class="fsection__head">
+        <h2 class="fsection__label">The trail, oldest first</h2>
+        <span class="fsection__more">{trail.length} pieces</span>
+      </div>
+      <ul class="evlist evlist--trail">
+        {trail.map(e => <EvidenceItem entry={e as any} hideTheme={idea.theme} />)}
+      </ul>
+    </div>
+  </section>
+
+  <nav class="inext shell" aria-label="More arguments">
+    <a href={`/future/ideas/${prev.slug}/`}><span>← {prev.num}</span>{prev.title}</a>
+    <a href={`/future/ideas/${next.slug}/`} class="inext__next"><span>{next.num} →</span>{next.title}</a>
+  </nav>
+</Base>

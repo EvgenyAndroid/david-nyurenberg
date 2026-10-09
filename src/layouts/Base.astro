@@ -5,9 +5,11 @@ interface Props {
   title: string;
   description?: string;
   ogImage?: string;
+  noindex?: boolean;
 }
 
 const {
+  noindex = false,
   title,
   description = 'David Nyurenberg — selected bylines, essays, and published work.',
   ogImage = '/og-default.png',
@@ -26,6 +28,7 @@ const absoluteOgImage = new URL(ogImage, Astro.site).toString();
     <meta name="description" content={description} />
     <meta name="generator" content={Astro.generator} />
     <meta name="author" content="David Nyurenberg" />
+    {noindex && <meta name="robots" content="noindex" />}
     <meta name="theme-color" content="#fafaf7" />
 
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
