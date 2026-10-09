@@ -105,6 +105,14 @@ const venues = new Set(all.map(e => e.venue)).size;
           <a href={awards.url} target="_blank" rel="noopener">All winners on AdExchanger ↗</a>
         </div>
         <div class="awards__photos">
+          <a class="shot" href="/awards/both-trophies.jpg" target="_blank" rel="noopener">
+            <picture>
+              <source srcset="/awards/both-trophies-thumb.webp" type="image/webp" />
+              <img src="/awards/both-trophies-thumb.jpg" width="560" height="747" loading="lazy" decoding="async"
+                alt="David Nyurenberg, right, holding both 2026 AdExchanger Awards trophies on the red carpet" />
+            </picture>
+            <span class="shot__cap">Both wins</span>
+          </a>
           <a class="shot shot--tall" href="/awards/team.jpg" target="_blank" rel="noopener">
             <picture>
               <source srcset="/awards/team-thumb.webp" type="image/webp" />

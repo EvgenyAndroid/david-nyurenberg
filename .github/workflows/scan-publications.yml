@@ -1,8 +1,8 @@
-name: Monthly publication scan
+name: Weekly publication scan
 
 on:
   schedule:
-    - cron: '0 7 1 * *'   # 07:00 UTC on the 1st of each month
+    - cron: '0 7 * * 1'   # 07:00 UTC every Monday
   workflow_dispatch:
 
 permissions:
@@ -26,15 +26,15 @@ jobs:
           if git diff --quiet -- src/data/publications.json; then
             echo "No new publications."; exit 0
           fi
-          branch="scan/$(date -u +%Y-%m)"
+          branch="scan/$(date -u +%G-W%V)"
           git config user.name "github-actions[bot]"
           git config user.email "41898283+github-actions[bot]@users.noreply.github.com"
           git checkout -B "$branch"
           git add src/data/publications.json
-          git commit -m "Publication scan $(date -u +%Y-%m): new coverage found"
+          git commit -m "Publication scan $(date -u +%G-W%V): new coverage found"
           git push -f origin "$branch"
           gh pr view "$branch" >/dev/null 2>&1 \
             && gh pr edit "$branch" --body-file scan-report.md \
             || gh pr create --head "$branch" --base main \
-                 --title "New publications found ($(date -u +%Y-%m))" \
+                 --title "New publications found ($(date -u +%G-W%V))" \
                  --body-file scan-report.md

@@ -1,4 +1,4 @@
-// Monthly scan for new David Nyurenberg coverage.
+// Weekly scan for new David Nyurenberg coverage.
 //
 // Pulls candidates from news feeds, drops anything already on the site (or in
 // src/data/scan-ignore.json), confirms each page actually names him, and

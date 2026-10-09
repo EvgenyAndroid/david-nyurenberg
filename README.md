@@ -50,9 +50,9 @@ Optional: `subtitle`, `synopsis`, `kind`, `slug`, `url`, and `links`
 (`[{ "label", "url" }]`, for one entry with several formats, e.g. a podcast
 plus a written interview).
 
-## Monthly scan
+## Weekly scan
 
-`.github/workflows/scan-publications.yml` runs on the 1st of each month (or by
+`.github/workflows/scan-publications.yml` runs every Monday at 07:00 UTC (or by
 hand from the Actions tab). It runs `scripts/scan-publications.mjs`, which
 checks the AdExchanger tag feed and Bing News for new coverage that names
 David, then opens a PR with the new entries. Before merging, check each

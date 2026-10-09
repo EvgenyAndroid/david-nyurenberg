@@ -43,10 +43,8 @@
   list-style: none;
   margin: 0;
   padding: 0;
-  overflow-x: auto;
-  scrollbar-width: none;
+  padding: 0.35rem 0;
 }
-.fnav__links::-webkit-scrollbar { display: none; }
 .fnav__links a {
   font-size: var(--t-xs);
   font-weight: 600;
@@ -281,7 +279,7 @@ a.tag:hover { background: var(--th); color: var(--paper); }
 .awards a { font-size: var(--t-xs); font-weight: 600; color: #9fb0c4; border-bottom-color: #343c48; justify-self: start; }
 
 /* Award photo thumbnails: framed, slightly rotated, straighten on hover */
-.awards__photos { display: grid; grid-template-columns: repeat(auto-fit, minmax(9rem, 1fr)); gap: 1.25rem; align-items: center; max-width: 34rem; justify-self: end; width: 100%; }
+.awards__photos { display: grid; grid-template-columns: repeat(auto-fit, minmax(9rem, 1fr)); gap: 1.25rem; align-items: center; max-width: 38rem; justify-self: end; width: 100%; }
 .awards .shot {
   position: relative;
   display: block;
@@ -292,7 +290,8 @@ a.tag:hover { background: var(--th); color: var(--paper); }
   transform: rotate(-2deg);
   transition: transform 0.35s cubic-bezier(.2,.7,.2,1), box-shadow 0.35s ease;
 }
-.awards .shot + .shot { transform: rotate(2.2deg) translateY(0.75rem); }
+.awards .shot:nth-child(2) { transform: rotate(2.2deg) translateY(0.75rem); }
+.awards .shot:nth-child(3) { transform: rotate(-1.2deg) translateY(-0.4rem); }
 .awards .shot:hover { transform: rotate(0) translateY(-4px) scale(1.02); box-shadow: 0 26px 50px -18px rgba(0, 0, 0, 0.8); z-index: 1; }
 .shot picture, .shot img { display: block; width: 100%; }
 .shot img { height: auto; aspect-ratio: 4 / 5; object-fit: cover; object-position: 50% 35%; }
@@ -309,7 +308,7 @@ a.tag:hover { background: var(--th); color: var(--paper); }
   .awards { grid-template-columns: 1fr; }
 }
 @media (prefers-reduced-motion: reduce) {
-  .awards .shot, .awards .shot + .shot { transform: none; transition: none; }
+  .awards .shot, .awards .shot:nth-child(n) { transform: none; transition: none; }
 }
 
 /* Start here */
@@ -352,6 +351,6 @@ a.tag:hover { background: var(--th); color: var(--paper); }
 @media (max-width: 520px) {
   .fnav__inner { gap: 0.75rem; }
   .fnav__brand { font-size: var(--t-base); }
-  .fnav__links { gap: 0.75rem; overflow: visible; }
+  .fnav__links { gap: 0.75rem; }
   .fnav__links a.fnav__cta { padding: 0.35rem 0.75rem; }
 }
