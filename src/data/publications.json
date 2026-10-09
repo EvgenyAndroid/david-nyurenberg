@@ -23,6 +23,29 @@
     ]
   },
   {
+    "date": "2026-10-07",
+    "venue": "Olyzon AAAW",
+    "title": "Agentic Advertising At Work: Advertisers and the Future of AI",
+    "type": "Panel",
+    "themes": [
+      "agentic"
+    ],
+    "synopsis": "Panel at Olyzon’s Agentic Advertising At Work evening in New York with Bayer’s Gary Guarnaccia, among practitioners already running agents on real TV budgets.",
+    "url": "https://aaaw.olyzon.tv/"
+  },
+  {
+    "date": "2026-10-06",
+    "venue": "Advertising Week New York",
+    "title": "Beyond the Stream: Reimagining the CTV Advertising Experience",
+    "type": "Panel",
+    "themes": [
+      "transparency",
+      "measurement"
+    ],
+    "synopsis": "Advertising Week session with Anoki, Amagi, Spectrum Reach and others on the roles of context and audience in CTV, and how new ad experiences change the answer.",
+    "url": "https://newyork2026.advertisingweek.com/aw/schedule/session/-731-2026-10-06-1100-session"
+  },
+  {
     "date": "2026-09-22",
     "venue": "State of Streaming",
     "title": "How Direct CTV Buys Become Programmatic Winners",
@@ -138,28 +161,6 @@
     ]
   },
   {
-    "date": "2026-05-26",
-    "venue": "Curation Conversations",
-    "title": "Linear Thinking Meets CTV Reality / What Actually Makes CTV Work",
-    "type": "Podcast",
-    "synopsis": "Two-part conversation on the relationship between linear and CTV, planning and transparency challenges, and what advertisers need to understand to make the channel work in practice.",
-    "url": "https://curationconversations.com/podcasts/part-1-linear-thinking-meets-ctv-reality",
-    "links": [
-      {
-        "label": "Part 1",
-        "url": "https://curationconversations.com/podcasts/part-1-linear-thinking-meets-ctv-reality"
-      },
-      {
-        "label": "Part 2",
-        "url": "https://curationconversations.com/podcasts/part-2-what-actually-makes-ctv-work"
-      }
-    ],
-    "themes": [
-      "measurement",
-      "transparency"
-    ]
-  },
-  {
     "date": "2026-05-19",
     "venue": "AdTechGod Pod",
     "title": "Ep. 134: Why Programmatic Advertising Needs a Reset",
@@ -228,6 +229,28 @@
     ]
   },
   {
+    "date": "2026-04-15",
+    "venue": "Curation Conversations",
+    "title": "Linear Thinking Meets CTV Reality / What Actually Makes CTV Work",
+    "type": "Podcast",
+    "synopsis": "Two-part conversation (15 and 22 April) on the relationship between linear and CTV, planning and transparency challenges, and what advertisers need to understand to make the channel work in practice.",
+    "url": "https://curationconversations.com/podcasts/part-1-linear-thinking-meets-ctv-reality",
+    "links": [
+      {
+        "label": "Part 1",
+        "url": "https://curationconversations.com/podcasts/part-1-linear-thinking-meets-ctv-reality"
+      },
+      {
+        "label": "Part 2",
+        "url": "https://curationconversations.com/podcasts/part-2-what-actually-makes-ctv-work"
+      }
+    ],
+    "themes": [
+      "measurement",
+      "transparency"
+    ]
+  },
+  {
     "date": "2026-04-12",
     "venue": "Marketecture",
     "title": "Signal vs. Static: How We Get to True CTV Transparency",
@@ -239,6 +262,17 @@
     ]
   },
   {
+    "date": "2026-03-10",
+    "venue": "Pluralistic",
+    "title": "Ad-tech is fascist tech",
+    "type": "Mention",
+    "themes": [
+      "incentives"
+    ],
+    "synopsis": "Cory Doctorow discusses David’s AdExchanger column “The Privacy ‘Zealots’ Were Right” at length.",
+    "url": "https://pluralistic.net/2026/03/10/ice-tech/"
+  },
+  {
     "date": "2026-03-09",
     "venue": "AdExchanger",
     "title": "The Privacy ‘Zealots’ Were Right: Ad Tech’s Infrastructure Was Always A Risk",
@@ -248,6 +282,17 @@
     "themes": [
       "incentives"
     ]
+  },
+  {
+    "date": "2026-03-05",
+    "venue": "Convergent TV World",
+    "title": "Why Marketers Who Rely on Pixels To Measure CTV Outcomes Are F&^ed",
+    "type": "Panel",
+    "themes": [
+      "measurement"
+    ],
+    "synopsis": "Session moderated by AdExchanger’s Victoria McNally: why pixel attribution undercounts CTV, using Laundry Sauce results, and how IP matching, CAPIs and MMM validate outcomes.",
+    "url": "https://www.chiefmarketer.com/event/convergent-tv-2026/"
   },
   {
     "date": "2026-02-24",
@@ -283,6 +328,18 @@
     ]
   },
   {
+    "date": "2025-11-30",
+    "venue": "State of Streaming",
+    "title": "CTV’s Future Lies in Its Past: Why Advertisers Must Embrace Traditional TV Tactics",
+    "type": "Interview",
+    "themes": [
+      "measurement",
+      "transparency"
+    ],
+    "synopsis": "Interview making the case that digital-style one-to-one metrics are the wrong frame for CTV, and that a hybrid approach rooted in traditional TV planning works better.",
+    "url": "https://www.stateofstreaming.com/articles/ctv-hybrid-approach-traditional-tv-david-nyurenberg-intermedia"
+  },
+  {
     "date": "2025-11-14",
     "venue": "Peer39",
     "title": "Peer39 Interview Series: David Nyurenberg, SVP of Digital at InterMedia Advertising",
@@ -314,6 +371,17 @@
     "themes": [
       "measurement"
     ]
+  },
+  {
+    "date": "2025-06-11",
+    "venue": "ADWEEK",
+    "title": "Amazon Doubles Ad Load on Prime Video",
+    "type": "Quoted",
+    "themes": [
+      "measurement"
+    ],
+    "synopsis": "Quoted on the upside: a biddable environment plus more supply should let buyers find premium impressions at more efficient rates and reach niche categories at scale.",
+    "url": "https://www.adweek.com/media/amazon-doubles-prime-video-ad-load/"
   },
   {
     "date": "2025-06-03",
@@ -474,6 +542,17 @@
     ]
   },
   {
+    "date": "2024-11-13",
+    "venue": "Rain the Growth Agency",
+    "title": "Are All Media Incentive Programs Bad?",
+    "type": "Authored",
+    "themes": [
+      "incentives"
+    ],
+    "synopsis": "Co-authored with Stasia Fulginiti: when vendor incentive programs bias agency decisions, and how they can be handled transparently and ethically.",
+    "url": "https://www.rainagency.com/insights-updates/are-all-media-incentive-programs-bad/"
+  },
+  {
     "date": "2024-10-24",
     "venue": "Digiday",
     "title": "The evolution of the great ‘curation’ tussle in ad tech",
@@ -495,6 +574,18 @@
       "incentives",
       "measurement"
     ]
+  },
+  {
+    "date": "2024-08-21",
+    "venue": "Rain the Growth Agency",
+    "title": "Rain the Growth Agency Partners with Chalice AI to Optimize Audience Targeting",
+    "type": "Press Release",
+    "themes": [
+      "agentic",
+      "measurement"
+    ],
+    "synopsis": "Quoted on adopting Chalice’s AI Audiences after testing showed it met clients’ direct-response goals.",
+    "url": "https://www.rainagency.com/insights-updates/rain-the-growth-agency-partners-with-chalice-ai-to-optimize-audience-targeting/"
   },
   {
     "date": "2024-07-10",
@@ -519,6 +610,53 @@
     ]
   },
   {
+    "date": "2024-05-14",
+    "venue": "Rain the Growth Agency",
+    "title": "Case Study: Leveraging Metadata Optimization in Connected TV Advertising",
+    "type": "Authored",
+    "themes": [
+      "transparency",
+      "measurement"
+    ],
+    "synopsis": "Case study on privacy-forward CTV targeting: optimizing against content metadata instead of audience data as regulation tightens and audience targeting weakens.",
+    "url": "https://www.rainagency.com/insights-updates/case-study-leveraging-metadata-optimization-in-connected-tv-advertising/"
+  },
+  {
+    "date": "2024-04-23",
+    "venue": "VAB",
+    "title": "Revolutionizing CTV with Custom AI Algorithms: Driving Performance with Premium CTV Publishers",
+    "type": "Panel",
+    "themes": [
+      "agentic",
+      "transparency"
+    ],
+    "synopsis": "VAB INSPIRE Spotlight on Innovation roundtable, available on demand, on Rain’s custom-algorithm approach to premium CTV.",
+    "url": "https://thevab.com/vab-happenings/spotlight-2024"
+  },
+  {
+    "date": "2024-04-04",
+    "venue": "ADWEEK",
+    "title": "Marketers Find New Ways to Buy Programmatic Ads Without Relying on User Data",
+    "type": "Quoted",
+    "themes": [
+      "measurement",
+      "transparency"
+    ],
+    "synopsis": "“We’re not optimizing against an addressable human audience.” Quoted on optimizing CTV against metadata and premium inventory rather than audience segments.",
+    "url": "https://www.adweek.com/programmatic/marketers-find-new-ways-to-buy-programmatic-ads-without-relying-on-user-data/"
+  },
+  {
+    "date": "2024-04-02",
+    "venue": "Rain the Growth Agency",
+    "title": "Embracing the Untapped Potential of News in Digital Video",
+    "type": "Authored",
+    "themes": [
+      "incentives"
+    ],
+    "synopsis": "Picking up a Trade Desk Forward ’24 discussion on quality journalism: how embracing news in digital video opens new opportunities for brands.",
+    "url": "https://www.rainagency.com/insights-updates/embracing-the-untapped-potential-of-news-in-digital-video/"
+  },
+  {
     "date": "2024-02-27",
     "venue": "Roku Advertising",
     "title": "Roku ads deliver 3.4x return-on-ad-spend for retail DTC brand",
@@ -528,6 +666,18 @@
     "themes": [
       "measurement"
     ]
+  },
+  {
+    "date": "2024-02-13",
+    "venue": "Rain the Growth Agency",
+    "title": "Case Study: Revolutionizing CTV with Custom AI Algorithms",
+    "type": "Authored",
+    "themes": [
+      "transparency",
+      "agentic"
+    ],
+    "synopsis": "How Rain and Chalice Custom Algorithms drove brand awareness and direct-response ROAS for a DTC apparel brand on CTV.",
+    "url": "https://www.rainagency.com/insights-updates/case-study-revolutionizing-ctv-with-custom-ai-algorithms/"
   },
   {
     "date": "2024-02-12",
@@ -540,6 +690,17 @@
       "incentives",
       "transparency"
     ]
+  },
+  {
+    "date": "2023-10-10",
+    "venue": "Rain the Growth Agency",
+    "title": "Fighting & Winning the Battle Against Made for Advertising Sites",
+    "type": "Authored",
+    "themes": [
+      "incentives"
+    ],
+    "synopsis": "Practical strategies for keeping programmatic budgets out of made-for-advertising sites.",
+    "url": "https://www.rainagency.com/insights-updates/fighting-winning-the-battle-against-made-for-advertising-sites/"
   },
   {
     "date": "2023-08-07",
