@@ -6,10 +6,12 @@ interface Props {
   description?: string;
   ogImage?: string;
   noindex?: boolean;
+  jsonLd?: object | object[];
 }
 
 const {
   noindex = false,
+  jsonLd,
   title,
   description = 'David Nyurenberg — selected bylines, essays, and published work.',
   ogImage = '/og-default.png',
@@ -33,6 +35,8 @@ const absoluteOgImage = new URL(ogImage, Astro.site).toString();
 
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <link rel="canonical" href={canonicalUrl} />
+    <link rel="alternate" type="text/plain" href="/llms.txt" title="llms.txt" />
+    {jsonLd && <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />}
 
     <!-- Open Graph -->
     <meta property="og:title" content={fullTitle} />

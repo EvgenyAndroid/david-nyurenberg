@@ -6,6 +6,7 @@ import Contact from '../../components/Contact.astro';
 import publications from '../../data/publications.json';
 import { ideas, type Idea, type Theme } from '../../data/ideas';
 import '../../styles/future.css';
+import { person, SITE } from '../../data/person';
 
 export function getStaticPaths() {
   return ideas.map(idea => ({ params: { slug: idea.slug }, props: { idea } }));
@@ -31,7 +32,15 @@ const idx = ideas.findIndex(i => i.slug === idea.slug);
 const next = ideas[(idx + 1) % ideas.length];
 const prev = ideas[(idx - 1 + ideas.length) % ideas.length];
 ---
-<Base title={idea.title.replace(/\.$/, '')} description={idea.thesis}>
+<Base title={idea.title.replace(/\.$/, '')} description={idea.thesis}
+  jsonLd={{ '@context': 'https://schema.org', '@graph': [
+    { '@type': 'Article', headline: idea.title, description: idea.thesis,
+      url: `${SITE}/ideas/${idea.slug}/`, mainEntityOfPage: `${SITE}/ideas/${idea.slug}/`,
+      author: { '@id': person['@id'] }, publisher: { '@id': person['@id'] }, image: person.image,
+      articleBody: idea.argument.join('\n\n'),
+      citation: trail.map(e => ({ '@type': 'CreativeWork', name: e.title, url: (e as any).url, datePublished: e.date, publisher: e.venue })) },
+    person,
+  ] }}>
   <FutureNav current={idea.slug} />
 
   <header class={`ihero ihero--${idea.theme}`}>

@@ -6,6 +6,7 @@ import Contact from '../components/Contact.astro';
 import publications from '../data/publications.json';
 import { ideas, proof, awards, type Theme } from '../data/ideas';
 import '../styles/future.css';
+import { person, SITE } from '../data/person';
 
 type Entry = { date: string; venue: string; title: string; type?: string; themes?: Theme[] };
 const all = (publications as Entry[]).slice().sort((a, b) => b.date.localeCompare(a.date));
@@ -19,6 +20,11 @@ const quotes = [ideas[0].quotes[0], ideas[1].quotes[1]].map((q, n) => ({ ...q, i
 const venues = new Set(all.map(e => e.venue)).size;
 ---
 <Base title="David Nyurenberg"
+  jsonLd={{ '@context': 'https://schema.org', '@graph': [
+    { '@type': 'WebSite', '@id': `${SITE}/#website`, url: `${SITE}/`, name: 'David Nyurenberg', publisher: { '@id': person['@id'] } },
+    { '@type': 'ProfilePage', url: `${SITE}/`, name: 'David Nyurenberg', mainEntity: { '@id': person['@id'] } },
+    person,
+  ] }}
   description="David Nyurenberg on making connected TV accountable: show-level transparency, honest measurement, aligned incentives and agentic buying.">
   <FutureNav />
 

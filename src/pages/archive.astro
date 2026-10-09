@@ -2,6 +2,7 @@
 import Base from '../layouts/Base.astro';
 import FutureNav from '../components/FutureNav.astro';
 import '../styles/future.css';
+import { person, SITE } from '../data/person';
 import publications from '../data/publications.json';
 import linkedinUrls from '../data/linkedin-urls.json';
 
@@ -116,6 +117,12 @@ function formatDate(date: string): string {
 ---
 <Base
   title="Archive"
+  jsonLd={{ '@context': 'https://schema.org', '@graph': [
+    { '@type': 'CollectionPage', url: `${SITE}/archive/`, name: 'David Nyurenberg: writing & press archive', about: { '@id': person['@id'] },
+      mainEntity: { '@type': 'ItemList', numberOfItems: all.length,
+        itemListElement: all.map((e, i) => ({ '@type': 'ListItem', position: i + 1, item: { '@type': 'CreativeWork', name: e.title, url: urlFor(e), datePublished: e.date, publisher: e.venue } })) } },
+    person,
+  ] }}
   description={`Selected bylines and published work by David Nyurenberg across ${venuesSortedByCount.length || 'multiple'} publications.`}
 >
   <FutureNav current="archive" />

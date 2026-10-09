@@ -1,0 +1,7 @@
+# david-nyurenberg.com: a public profile meant to be found and cited.
+# Search engines and AI answer engines are welcome.
+User-agent: *
+Content-Signal: search=yes, ai-input=yes
+Allow: /
+
+Sitemap: https://david-nyurenberg.com/sitemap-index.xml
