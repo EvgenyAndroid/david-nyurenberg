@@ -60,6 +60,9 @@ type Entry = {
   type?: string;
   slug?: string;
   url?: string;     // explicit per-entry URL (overrides resolver)
+  /** Extra links for an entry with more than one format (e.g. podcast +
+   *  written interview). Rendered as a row under the card. */
+  links?: { label: string; url: string }[];
 };
 
 const all = (publications as Entry[])
@@ -191,6 +194,13 @@ function formatDate(date: string): string {
                       {e.synopsis && <div class="bib-synopsis">{e.synopsis}</div>}
                       {external && <span class="bib-arrow" aria-hidden="true">↗</span>}
                     </a>
+                    {e.links && e.links.length > 0 && (
+                      <div class="bib-links">
+                        {e.links.map(l => (
+                          <a href={l.url} target="_blank" rel="noopener">{l.label} ↗</a>
+                        ))}
+                      </div>
+                    )}
                   </li>
                 );
               })}

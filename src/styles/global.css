@@ -369,6 +369,18 @@ main { display: block; }
   line-height: 1.55;
   max-width: 65ch;
 }
+.bib-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem 1.25rem;
+  padding: 0 0.5rem 1.25rem 0.25rem;
+  margin-top: -0.75rem;
+  font-family: var(--font-sans);
+  font-size: var(--t-xs);
+  font-weight: 600;
+  letter-spacing: 0.04em;
+}
+.bib-links a { color: var(--accent); }
 .bib-arrow {
   position: absolute;
   top: 1.5rem;

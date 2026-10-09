@@ -37,7 +37,18 @@ All publications live in `src/data/publications.json` as an array of entries:
 ```
 
 Required fields: `date` (`YYYY-MM` or `YYYY-MM-DD`), `venue`, `title`.
-Optional: `subtitle`, `synopsis`, `kind`, `slug`, `url`.
+Optional: `subtitle`, `synopsis`, `kind`, `slug`, `url`, and `links`
+(`[{ "label", "url" }]`, for one entry with several formats, e.g. a podcast
+plus a written interview).
+
+## Monthly scan
+
+`.github/workflows/scan-publications.yml` runs on the 1st of each month (or by
+hand from the Actions tab). It runs `scripts/scan-publications.mjs`, which
+checks the AdExchanger tag feed and Bing News for new coverage that names
+David, then opens a PR with the new entries. Before merging, check each
+entry's `type` and `synopsis`, because both are machine guesses. To stop the
+scan proposing an item again, add its URL to `src/data/scan-ignore.json`.
 
 If `url` is set, that's the direct link. Otherwise the resolver falls back to
 `src/data/linkedin-urls.json` for known deep-links, then to the venue's

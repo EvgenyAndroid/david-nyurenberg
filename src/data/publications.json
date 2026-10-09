@@ -1,5 +1,87 @@
 [
   {
+    "date": "2026-10-08",
+    "venue": "AdExchanger",
+    "title": "How Does Agentic Buying Work In CTV?",
+    "type": "Feature",
+    "synopsis": "Featured alongside Sydney Brower on how InterMedia Advertising's agentic buying workflow actually runs on connected TV, and how nascent the technology still is.",
+    "url": "https://www.adexchanger.com/ctv-roundup/how-does-agentic-buying-work-in-ctv/"
+  },
+  {
+    "date": "2026-10-07",
+    "venue": "PR Newswire",
+    "title": "Olyzon Launches its Agentic Orchestration Platform for Advertising, Live at Advertising Week New York",
+    "type": "Press Release",
+    "synopsis": "Quoted as a customer in Olyzon's launch of its agentic orchestration platform, starting with CTV and extending across YouTube, social, digital audio and DOOH.",
+    "url": "https://www.prnewswire.com/news-releases/olyzon-launches-its-agentic-orchestration-platform-for-advertising-live-at-advertising-week-new-york-302900467.html"
+  },
+  {
+    "date": "2026-09-22",
+    "venue": "State of Streaming",
+    "title": "How Direct CTV Buys Become Programmatic Winners",
+    "type": "Podcast",
+    "synopsis": "Podcast guest (S5E5) with a written companion interview, “Unlocking CTV’s Black Box”: three InterMedia projects covering direct publisher buys, privacy-safe show-level targeting and AI sentiment analysis.",
+    "url": "https://podcast.stateofstreaming.com/david-nyurenberg-intermedia-s5e5/",
+    "links": [
+      {
+        "label": "Listen to the episode",
+        "url": "https://podcast.stateofstreaming.com/david-nyurenberg-intermedia-s5e5/"
+      },
+      {
+        "label": "Read the interview",
+        "url": "https://www.stateofstreaming.com/articles/unlocking-ctvs-black-box-david-nyurenberg-im-agency"
+      }
+    ]
+  },
+  {
+    "date": "2026-09-03",
+    "venue": "AdExchanger",
+    "title": "The FTC’s Amazon Lawsuit Is Ad Tech’s History Of Opacity Repeating Itself",
+    "type": "Quoted",
+    "synopsis": "Quoted on transparency and industry accountability, as buy-side experts frame the case as another Big Tech platform exploiting the opacity built into programmatic auctions.",
+    "url": "https://www.adexchanger.com/platforms/the-ftcs-amazon-lawsuit-is-ad-techs-history-of-opacity-repeating-itself/"
+  },
+  {
+    "date": "2026-08-27",
+    "venue": "PR Newswire",
+    "title": "InterMedia Advertising Earns Five 2026 AdExchanger Award Nominations",
+    "type": "Press Release",
+    "synopsis": "Quoted on InterMedia Advertising being named a finalist in five categories of the 2026 AdExchanger Awards for three collaborative initiatives.",
+    "url": "https://www.prnewswire.com/news-releases/intermedia-advertising-earns-five-2026-adexchanger-award-nominations-302861854.html"
+  },
+  {
+    "date": "2026-07-28",
+    "venue": "AdExchanger",
+    "title": "Three Advertising Industry Myths The Market Has Already Debunked",
+    "type": "Authored",
+    "synopsis": "Data-Driven Thinking column co-authored with Irina Dzyubinsky on three industry storylines the market has already disproven.",
+    "url": "https://www.adexchanger.com/data-driven-thinking/three-advertising-industry-myths-the-market-has-already-debunked/"
+  },
+  {
+    "date": "2026-07-06",
+    "venue": "AdExchanger",
+    "title": "CTV Buyers Are Getting The Show-Level Performance Optimization They’ve Always Wanted",
+    "type": "Feature",
+    "synopsis": "Featured on the InterMedia Advertising, Peer39 and Pontiac Intelligence collaboration that delivered show-level cost-per-acquisition data for 94% of CTV impressions.",
+    "url": "https://www.adexchanger.com/tv/ctv-buyers-are-getting-the-show-level-performance-optimization-theyve-always-wanted/"
+  },
+  {
+    "date": "2026-06-15",
+    "venue": "AdTechGod Pod",
+    "title": "Is Fox the New King of Connected TV? Breaking Down the Fox–Roku Deal",
+    "type": "Podcast",
+    "synopsis": "Panel guest with Kyle Dozeman and Richie Hyden on the strategic implications of the Fox–Roku deal for connected TV.",
+    "url": "https://www.iheart.com/podcast/269-adtechgod-pod-217711661/episode/breaking-is-fox-the-new-king-336838861/"
+  },
+  {
+    "date": "2026-06-11",
+    "venue": "ADWEEK",
+    "title": "TAG Loses Ground as P&G Drops Mandate and Google, Trade Desk Ditch Certifications",
+    "type": "Quoted",
+    "synopsis": "Quoted on certification and media quality as one of adland’s most influential accreditors shows signs of strain.",
+    "url": "https://www.adweek.com/media/tag-loses-ground-as-pg-drops-mandate-and-google-trade-desk-ditch-certifications/"
+  },
+  {
     "date": "2026-05-19",
     "venue": "AdTechGod Pod",
     "title": "Ep. 134: Why Programmatic Advertising Needs a Reset",
@@ -40,6 +122,30 @@
     "url": "https://services.monoai.co/safelink/l/v2/dfQEFXVt"
   },
   {
+    "date": "2026-04-22",
+    "venue": "ADWEEK",
+    "title": "The Trade Desk Is Quietly Phasing Out Its Signature Periodic Table",
+    "type": "Quoted",
+    "synopsis": "Quoted on the buyer experience as The Trade Desk lets advertisers customize which Kokai tiles they see.",
+    "url": "https://www.adweek.com/media/exclusive-the-trade-desk-phasing-out-periodic-table/"
+  },
+  {
+    "date": "2026-04-12",
+    "venue": "Marketecture",
+    "title": "Signal vs. Static: How We Get to True CTV Transparency",
+    "type": "Interview",
+    "synopsis": "At Marketecture Live III in New York, David and Peer39 CEO Mario Diez break down the lack of signal transparency in CTV.",
+    "url": "https://news.marketecture.tv/p/signal-vs-static-how-we-get-to-true-ctv-transparency"
+  },
+  {
+    "date": "2026-03-09",
+    "venue": "AdExchanger",
+    "title": "The Privacy ‘Zealots’ Were Right: Ad Tech’s Infrastructure Was Always A Risk",
+    "type": "Authored",
+    "synopsis": "Data-Driven Thinking column arguing that government interest in digital ad infrastructure for surveillance is exactly what critics long warned about.",
+    "url": "https://www.adexchanger.com/data-driven-thinking/the-privacy-zealots-were-right-ad-techs-infrastructure-was-always-a-risk/"
+  },
+  {
     "date": "2026-02-24",
     "venue": "Signal & Noise",
     "title": "The Cost of Keeping Quiet: Ad Fraud, Incentives & The Silence Protecting Billions",
@@ -48,12 +154,28 @@
     "url": "https://services.monoai.co/safelink/l/v2/y9R2YPyz"
   },
   {
+    "date": "2025-12-01",
+    "venue": "AdExchanger",
+    "title": "CTV Is Less Transparent Than YouTube. That Should Alarm Everyone",
+    "type": "Authored",
+    "synopsis": "Data-Driven Thinking column on why CTV spend and performance are plateauing: buyers cannot see what they are buying.",
+    "url": "https://www.adexchanger.com/data-driven-thinking/ctv-is-less-transparent-than-youtube-that-should-alarm-everyone/"
+  },
+  {
     "date": "2025-11-14",
     "venue": "Peer39",
     "title": "Peer39 Interview Series: David Nyurenberg, SVP of Digital at InterMedia Advertising",
     "type": "Interview",
     "synopsis": "Following the Brand Safety Summit, David unpacks the industry's misplaced priorities, the challenges of measuring true brand safety in streaming, and the need for transparency.",
     "url": "https://services.monoai.co/safelink/l/v2/3WciNsPJ"
+  },
+  {
+    "date": "2025-07-09",
+    "venue": "AdExchanger",
+    "title": "CTV Is Not A One-To-One Channel, So Stop Buying It Like One",
+    "type": "Authored",
+    "synopsis": "Data-Driven Thinking column on why one-to-one programmatic logic carried over from display and online video does not fit how CTV behaves.",
+    "url": "https://www.adexchanger.com/on-tv-and-video/ctv-is-not-a-one-to-one-channel-so-stop-buying-it-like-one/"
   },
   {
     "date": "2025-06-03",
@@ -78,6 +200,22 @@
     "type": "Interview",
     "synopsis": "Interviewed on how Rain the Growth Agency navigated the opaque landscape of CTV ad buying by developing an algorithm with Chalice Custom Algorithms to extract show-level data for programmatic bids.",
     "url": "https://services.monoai.co/safelink/l/v2/UgvFy2Vq"
+  },
+  {
+    "date": "2024-11-20",
+    "venue": "AdExchanger",
+    "title": "The Race To The Bottom Is Over. Advertisers Care About Quality Again",
+    "type": "Authored",
+    "synopsis": "Data-Driven Thinking column on how “following the audience” let low-quality sites thrive, and the shift back toward quality.",
+    "url": "https://www.adexchanger.com/data-driven-thinking/the-race-to-the-bottom-is-over-advertisers-care-about-quality-again/"
+  },
+  {
+    "date": "2024-07-10",
+    "venue": "AdExchanger",
+    "title": "The Golden Calf Of Addressability: Reevaluating The Foundations Of Digital Advertising",
+    "type": "Authored",
+    "synopsis": "Data-Driven Thinking column calling for the industry to move past its addiction to addressable targeting and deterministic attribution.",
+    "url": "https://www.adexchanger.com/marketers/the-golden-calf-of-addressability-reevaluating-the-foundations-of-digital-advertising-2/"
   },
   {
     "date": "2024-02-12",
