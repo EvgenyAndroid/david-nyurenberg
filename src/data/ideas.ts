@@ -1,8 +1,9 @@
 // The four arguments David's published work keeps returning to.
 // Every quote is verbatim from his own columns or interviews, and every
 // number is sourced to the piece it appeared in. The argument paragraphs
-// condense his published positions. They are a draft for David to put in
-// his own voice.
+// are written in David's first-person voice, built only from experiences
+// and positions he has already published. They need his sign-off before
+// /future replaces the home page.
 
 export type Theme = 'transparency' | 'measurement' | 'incentives' | 'agentic' | 'career';
 
@@ -44,9 +45,9 @@ export const ideas: Idea[] = [
     title: 'Buy streaming by the show.',
     thesis: 'You cannot optimize, protect a brand or price fairly what you are not allowed to see, and CTV still hides the one thing linear TV always showed: the program.',
     argument: [
-      'Linear television was always bought and valued at the show and network level. CTV kept the screen and threw away that model, importing the audience-first habits of display and online video. Buyers get app-level reporting and, with luck, a genre label. Show-level data is mostly withheld because publishers fear buyers will cherry-pick the best content.',
-      'The cost shows up in the market. When buyers cannot see what they are buying, budgets plateau, inventory becomes interchangeable, and the same publisher gets bought twice through different paths. Publishers lose too: content they pitch as premium is sold as an anonymous bundle the moment it goes programmatic.',
-      'The fix is already working where it exists. Show-level inclusion lists built from top linear programs were the best-performing tactic when a partner exposed show data. Rain’s show-level algorithm found back doors in 2025, and in 2026 a privacy-safe content-ID framework with Peer39 and Pontiac Intelligence reported show-level CPA for 94% of a campaign’s impressions. That work became an AdExchanger Awards finalist.',
+      'Television was never sold blind. Linear TV has always traded at the show and network level, where price reflected what the content cost to make and how much people cared about it. CTV kept the screen and threw that model away. I get app-level reporting and, if I’m lucky, a genre label. Show-level data is withheld because publishers are afraid I’ll cherry-pick their best programs. That is not innovation. It’s a regression.',
+      'The cost is already showing up. Publishers tell me privately that CTV spend is flattening and buyers are hesitant to push more budget. Of course they are. When you can’t see what you’re buying, every package looks the same, optimization turns into guesswork, and you end up buying the same publisher twice through two different paths. Publishers lose too. Every sales pitch I hear is about the content, and the moment that inventory goes programmatic, the content disappears.',
+      'I know what happens when the lights come on. When a partner gave me true show-level transparency, an inclusion list built from top-performing linear shows was the best tactic in the entire campaign. At Rain we built an algorithm to find back doors to show-level data. At InterMedia, working with Peer39 and Pontiac, we got show-level CPA on 94% of a campaign’s impressions, all privacy-safe. I teared up at the first spreadsheet. The Holy Grail is in reach. My challenge to the CTV industry is simple: be better than Google.',
     ],
     quotes: [
       { text: 'You cannot market premium and deliver a blind bill of goods.', source: 'AdExchanger, Dec 2025', url: ADX_YT },
@@ -65,9 +66,9 @@ export const ideas: Idea[] = [
     title: 'Stop measuring TV like search.',
     thesis: 'Television builds memory over weeks; judging it on attribution windows designed for intent capture makes a working channel look broken.',
     argument: [
-      'The industry now describes connected TV in the vocabulary of paid search and social: outcomes, ROAS, performance. But a viewer watching a drama on a Tuesday night is not expressing intent the way a searcher is. TV’s influence is cumulative and delayed, so compressed attribution windows read it as underperformance and budgets get pulled from a channel doing exactly what it should.',
-      'The same logic breaks targeting. CTV is a household screen, not a personal one, so one-to-one audience segments shrink supply, raise CPMs and concentrate delivery in the same five big markets. A better plan starts from the customer file: the ZIP codes where customers over-index, census data, lookalike markets, and direct relationships with the roughly 20 publishers that hold most viewing.',
-      'None of this argues for less measurement. It argues for measurement that fits the channel: marketing mix models, incrementality tests and attribution read together, and identity treated as something to be measured rather than assumed.',
+      'Somewhere along the way we started talking about TV in the language of paid search and social: outcomes, ROAS, performance. But someone watching a drama on a Tuesday night is not typing a query into a search box. One is watching content. The other is expressing intent. TV works over weeks and months, and when you judge it on attribution windows built for search, it looks like it failed when it’s doing exactly what it was built to do.',
+      'We made the same mistake with targeting. CTV is not a personal screen; it’s a household screen. A logged-in profile doesn’t tell you who is on the couch. Pile on third-party segments and supply shrinks, CPMs climb, and delivery collapses into the same five markets every time. I start somewhere else: the customer file, the ZIP codes where customers over-index, census data and lookalike markets. Then I buy direct from the roughly 20 publishers that hold most of the viewing.',
+      'I’m not arguing for less measurement. I’m arguing for measurement that fits the channel: mix models, incrementality tests and attribution read together, and identity treated as a standard you measure, not an assumption you make. Plan CTV like linear: context first, geography informed, built for households, not IDs.',
     ],
     quotes: [
       { text: 'CTV is not a personal screen; it is a household screen.', source: 'AdExchanger, Jul 2025', url: ADX_1TO1 },
@@ -85,9 +86,9 @@ export const ideas: Idea[] = [
     title: 'Follow the incentives.',
     thesis: 'Programmatic’s waste, fraud and opacity persist because the supply chain is paid to tolerate them, not because the technology is missing.',
     argument: [
-      'Fifteen years of audience-first buying trained marketers to chase cheap, hypertargeted impressions validated by non-incremental attribution. That rewarded made-for-advertising sites and vendors whose incentives do not match their clients’. Quality, reach and context, the fundamentals of media planning, were traded for vanity metrics.',
-      'The fix is contractual and structural before it is technical: SSP agreements that ban resold media and MFA and require make-goods, fees separated from working media, inclusion lists, and direct paths to publishers. The same lens explains curation markups, certification bodies losing ground, platform UX that adds friction, and the FTC’s case against Amazon. Opacity is a business model.',
-      'It also explains privacy. An ecosystem built on broadcasting granular identity was always going to create exposure no one fully controls. Critics called that out for years and were waved off as zealots. Incentives, more than public statements, decide what the industry actually does.',
+      'Early in my career, on the ad tech vendor side, I watched audiences get swapped or dropped to hit budgets without the client ever knowing. The performance metrics didn’t move, so nobody asked. That stuck with me. Fifteen years of audience-first buying trained a generation of marketers to chase cheap, hypertargeted impressions, and the people who benefited most were made-for-advertising sites and vendors whose incentives never matched their clients’.',
+      'You don’t fix that with another tool. You fix it with contracts and structure. At Rain, our SSP agreements prohibited resold media and MFA sites, required ads.txt compliance and restricted delivery to our inclusion list, and when a partner missed, we required make-goods. We broke tech, audience and platform fees out of working media. Look at curation markups, certification bodies losing ground or the FTC’s case against Amazon through the same lens and you see the same thing. Opacity isn’t a bug. It’s a business model.',
+      'The same goes for privacy. I’ve been saying for years that addressable advertising was a strategic mistake. An ecosystem built on broadcasting granular identity was always going to create exposure no one could control. The critics we waved off as zealots were right. In our industry, what people are paid to do beats what they say every time.',
     ],
     quotes: [
       { text: 'In our industry, incentives shape behavior more than public statements or well-meaning buzzwords ever do.', source: 'AdExchanger, Mar 2026', url: ADX_PRIV },
@@ -104,9 +105,9 @@ export const ideas: Idea[] = [
     title: 'Agents change what expertise means.',
     thesis: 'AI agents earn their place by shortening the distance between insight and action, with a human making the call. That takes operators, not demos.',
     argument: [
-      'InterMedia runs agentic buying in production. CTV reporting from Vibe flows into Claude, and Olyzon’s orchestration layer carries decisions out to DSPs and SSPs across channels. Planners ask a question in plain language and act on the answer across platforms without rebuilding the stack.',
-      'The skill shifts. Knowing which buttons to push in which platform matters less; judging which changes to make matters more. Larger holding companies and brands will likely build their own versions of these buying integrations.',
-      'Agentic advertising is promising but still unproven at scale, so the bar is practical: a human makes every final decision, and the test is whether insight turns into action faster on the stack the team already runs.',
+      'We used to spend a ridiculous amount of time bouncing between platforms, digging through spreadsheets for insights, and then acting on them by hand. Now our CTV reporting flows into Claude, and Olyzon carries the decisions out to DSPs and SSPs across channels. I can ask how a campaign is doing in plain language and act on the answer across platforms with a single prompt, without rebuilding our stack around another platform.',
+      'That changes what it means to be an expert. It used to mean knowing your way around a platform: which buttons to push and where to go. Now it means being judicious about which changes to make. I expect the big holding companies and brands to build their own versions of these integrations.',
+      'Agentic advertising is promising, and it is still unproven at scale. My bar is practical. A human makes every final call, and the only test that matters is whether the distance between seeing something and doing something gets shorter on the stack you already run.',
     ],
     quotes: [
       { text: 'Instead of being an expert in how to navigate a platform and push the buttons and knowing where to go, you’re an expert in being judicious about what changes to make.', source: 'AdExchanger, Oct 2026', url: ADX_AGENT },
