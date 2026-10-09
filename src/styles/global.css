@@ -141,6 +141,108 @@ main { display: block; }
   margin: 1rem 0 0;
 }
 
+/* Hero layout: text left, portrait right. The portrait sits in an arch
+ * (editorial, a little architectural) with a slate outline "echo" offset
+ * behind it, and a vertical caption running up its edge. */
+.hero__grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) clamp(15rem, 30vw, 22rem);
+  align-items: end;
+  gap: clamp(2rem, 6vw, 5rem);
+}
+.hero__stats {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0 2.5rem;
+  margin: 2.25rem 0 0;
+  padding-top: 1.25rem;
+  border-top: 1px solid var(--rule);
+}
+.hero__stats div { min-width: 5rem; }
+.hero__stats dt {
+  font-family: var(--font-sans);
+  font-size: 0.68rem;
+  text-transform: uppercase;
+  letter-spacing: 0.16em;
+  font-weight: 600;
+  color: var(--ink-light);
+}
+.hero__stats dd {
+  margin: 0.15rem 0 0;
+  font-family: var(--font-serif);
+  font-size: var(--t-2xl);
+  font-weight: 600;
+  line-height: 1;
+  color: var(--accent);
+  letter-spacing: -0.02em;
+  font-variant-numeric: lining-nums tabular-nums;
+}
+
+.portrait {
+  position: relative;
+  margin: 0;
+  aspect-ratio: 4 / 5;
+  justify-self: end;
+  width: 100%;
+}
+.portrait picture,
+.portrait img {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+.portrait img {
+  object-fit: cover;
+  object-position: 50% 18%;
+  border-radius: 999px 999px 4px 4px;
+  filter: grayscale(1) contrast(1.06);
+  position: relative;
+  z-index: 1;
+  transition: transform 0.6s cubic-bezier(.2,.7,.2,1), filter 0.6s ease;
+}
+.portrait:hover img {
+  transform: translate(-6px, -6px);
+  filter: grayscale(1) contrast(1.12);
+}
+.portrait__echo {
+  position: absolute;
+  inset: 0;
+  transform: translate(14px, 14px);
+  border: 1.5px solid var(--accent);
+  border-radius: 999px 999px 4px 4px;
+  transition: transform 0.6s cubic-bezier(.2,.7,.2,1);
+}
+.portrait:hover .portrait__echo { transform: translate(20px, 20px); }
+.portrait__caption {
+  position: absolute;
+  left: -2.1rem;
+  bottom: 0;
+  transform-origin: left bottom;
+  transform: rotate(-90deg) translateX(0) translateY(100%);
+  white-space: nowrap;
+  font-family: var(--font-sans);
+  font-size: 0.66rem;
+  text-transform: uppercase;
+  letter-spacing: 0.24em;
+  font-weight: 600;
+  color: var(--ink-light);
+}
+
+@media (max-width: 760px) {
+  .hero__grid {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+  .portrait {
+    order: -1;
+    justify-self: start;
+    width: 9.5rem;
+  }
+  .portrait__caption { display: none; }
+  .portrait__echo { transform: translate(9px, 9px); }
+  .hero__stats { gap: 1rem 2rem; }
+}
+
 /* ─── Archive section (search + filter + list) ───────────────────────── */
 .archive { padding: 3rem 0 5rem; }
 .empty-state { padding: 5rem 0; color: var(--ink-muted); text-align: center; }
@@ -264,17 +366,90 @@ main { display: block; }
 .filter-empty[hidden] { display: none; }
 
 /* ─── Bibliography list ──────────────────────────────────────────────── */
-.year-section { margin-bottom: 3rem; }
+.year-tools {
+  display: flex;
+  justify-content: flex-end;
+  margin: -0.5rem 0 0.75rem;
+}
+.year-toggle {
+  font-family: var(--font-sans);
+  font-size: var(--t-xs);
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  color: var(--accent);
+  background: none;
+  border: none;
+  border-bottom: 1px solid var(--accent);
+  padding: 0.2rem 0;
+  cursor: pointer;
+}
+.year-section { margin-bottom: 0.5rem; }
+.year-section[open] { margin-bottom: 2.5rem; }
 .year-section[hidden] { display: none; }
+.year-section__summary {
+  list-style: none;
+  display: flex;
+  align-items: baseline;
+  gap: 1.25rem;
+  padding: 1rem 0.25rem 0.6rem;
+  border-bottom: 2px solid var(--ink);
+  cursor: pointer;
+  user-select: none;
+}
+.year-section__summary::-webkit-details-marker { display: none; }
+.year-section__summary:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+}
+.year-section:not([open]) .year-section__summary {
+  border-bottom-width: 1px;
+  border-bottom-color: var(--rule);
+}
 .year-section__heading {
   font-family: var(--font-serif);
   font-size: var(--t-2xl);
   font-weight: 600;
   color: var(--ink);
-  padding-bottom: 0.5rem;
-  margin: 0 0 0.5rem;
-  border-bottom: 2px solid var(--ink);
+  margin: 0;
   letter-spacing: -0.02em;
+  font-variant-numeric: lining-nums;
+  transition: color 0.15s ease;
+}
+.year-section:not([open]) .year-section__heading { color: var(--ink-muted); }
+.year-section__summary:hover .year-section__heading { color: var(--accent); }
+.year-section__meta {
+  display: flex;
+  align-items: baseline;
+  gap: 0.75rem;
+  flex: 1;
+  min-width: 0;
+  font-family: var(--font-sans);
+  font-size: var(--t-xs);
+  color: var(--ink-light);
+}
+.year-section__count {
+  font-weight: 700;
+  color: var(--accent);
+  font-variant-numeric: tabular-nums;
+}
+.year-section__breakdown {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.year-section__chevron {
+  width: 0.6rem;
+  height: 0.6rem;
+  border-right: 1.5px solid var(--ink-muted);
+  border-bottom: 1.5px solid var(--ink-muted);
+  transform: rotate(45deg) translateY(-0.2rem);
+  transition: transform 0.2s ease;
+  flex-shrink: 0;
+  align-self: center;
+}
+.year-section[open] .year-section__chevron { transform: rotate(-135deg); }
+@media (max-width: 520px) {
+  .year-section__breakdown { display: none; }
 }
 
 .bib-list {

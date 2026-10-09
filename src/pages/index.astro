@@ -87,6 +87,23 @@ all.forEach(e => {
 const venuesSortedByCount = Object.entries(venueCounts)
   .sort(([, a], [, b]) => b - a);
 
+// ─── Per-year summary + headline stats ──────────────────────────────────
+const latestYear = years[0];
+function yearSummary(year: string): string {
+  const counts: Record<string, number> = {};
+  all.filter(e => e.date.startsWith(year)).forEach(e => {
+    const t = e.type || 'Other';
+    counts[t] = (counts[t] || 0) + 1;
+  });
+  return Object.entries(counts)
+    .sort(([, a], [, b]) => b - a)
+    .map(([t, n]) => `${n} ${t.toLowerCase()}`)
+    .join(' · ');
+}
+const authoredCount = all.filter(e => e.type === 'Authored').length;
+const spokenCount = all.filter(e => ['Podcast', 'Panel', 'Video Interview', 'Interview'].includes(e.type || '')).length;
+const firstYear = years[years.length - 1];
+
 function formatDate(date: string): string {
   if (!date) return '';
   const [y, m] = date.split('-');
@@ -102,17 +119,35 @@ function formatDate(date: string): string {
 
   <!-- ─── Hero ─── -->
   <section class="hero">
-    <div class="shell">
-      <span class="eyebrow">Writing & Press</span>
-      <h1 class="display">David<br/>Nyurenberg<span class="dot">.</span></h1>
-      <p class="hero__role">SVP, Digital · <strong>InterMedia Advertising</strong></p>
-      <p class="hero__sub">
-        {all.length > 0 ? (
-          <>Selected bylines, interviews, podcasts, and press across <strong>{venuesSortedByCount.length}</strong> publications. <strong>{all.length}</strong> entries.</>
-        ) : (
-          <>Selected bylines and published work. <em>(Content loading.)</em></>
+    <div class="shell hero__grid">
+      <div class="hero__text">
+        <span class="eyebrow">Writing & Press</span>
+        <h1 class="display">David<br/>Nyurenberg<span class="dot">.</span></h1>
+        <p class="hero__role">SVP, Digital · <strong>InterMedia Advertising</strong></p>
+        <p class="hero__sub">
+          {all.length > 0 ? (
+            <>Selected bylines, interviews, podcasts, and press across <strong>{venuesSortedByCount.length}</strong> publications. <strong>{all.length}</strong> entries.</>
+          ) : (
+            <>Selected bylines and published work. <em>(Content loading.)</em></>
+          )}
+        </p>
+        {all.length > 0 && (
+          <dl class="hero__stats">
+            <div><dt>Entries</dt><dd>{all.length}</dd></div>
+            <div><dt>Authored</dt><dd>{authoredCount}</dd></div>
+            <div><dt>On air &amp; stage</dt><dd>{spokenCount}</dd></div>
+            <div><dt>Since</dt><dd>{firstYear}</dd></div>
+          </dl>
         )}
-      </p>
+      </div>
+      <figure class="portrait">
+        <span class="portrait__echo" aria-hidden="true"></span>
+        <picture>
+          <source srcset="/david.webp" type="image/webp" />
+          <img src="/david.jpg" alt="David Nyurenberg" width="720" height="720" loading="eager" decoding="async" />
+        </picture>
+        <figcaption class="portrait__caption" aria-hidden="true">CTV · Programmatic · Transparency</figcaption>
+      </figure>
     </div>
   </section>
 
@@ -159,9 +194,19 @@ function formatDate(date: string): string {
         </p>
 
         <!-- Bibliography by year -->
+        <div class="year-tools">
+          <button type="button" class="year-toggle" data-year-toggle>Expand all years</button>
+        </div>
         {years.map(year => (
-          <section class="year-section" data-year={year}>
-            <h2 class="year-section__heading" id={`year-${year}`}>{year}</h2>
+          <details class="year-section" data-year={year} open={year === latestYear}>
+            <summary class="year-section__summary" id={`year-${year}`}>
+              <h2 class="year-section__heading">{year}</h2>
+              <span class="year-section__meta">
+                <span class="year-section__count">{all.filter(e => e.date.startsWith(year)).length}</span>
+                <span class="year-section__breakdown">{yearSummary(year)}</span>
+              </span>
+              <span class="year-section__chevron" aria-hidden="true"></span>
+            </summary>
             <ul class="bib-list">
               {all.filter(e => (e.date || '').startsWith(year)).map(e => {
                 const href = urlFor(e);
@@ -205,7 +250,7 @@ function formatDate(date: string): string {
                 );
               })}
             </ul>
-          </section>
+          </details>
         ))}
 
         <!-- LinkedIn activity note — short-cycle posts don't get archived
@@ -240,6 +285,23 @@ function formatDate(date: string): string {
     const searchCount = document.querySelector<HTMLElement>('[data-search-count]');
 
     const state = { venue: '', query: '' };
+    let savedOpen: Map<Element, boolean> | null = null;
+
+    // ─── Expand / collapse all years ────────────────────────────────────
+    const yearToggle = document.querySelector<HTMLButtonElement>('[data-year-toggle]');
+    const details = () => Array.from(yearSections) as HTMLDetailsElement[];
+    function syncToggle() {
+      if (!yearToggle) return;
+      const allOpen = details().filter(d => !d.hidden).every(d => d.open);
+      yearToggle.textContent = allOpen ? 'Collapse earlier years' : 'Expand all years';
+      yearToggle.dataset.allOpen = String(allOpen);
+    }
+    yearToggle?.addEventListener('click', () => {
+      const open = yearToggle.dataset.allOpen !== 'true';
+      details().forEach((d, i) => { d.open = open || i === 0; });
+      syncToggle();
+    });
+    details().forEach(d => d.addEventListener('toggle', syncToggle));
 
     function applyFilters() {
       const q = state.query.trim().toLowerCase();
@@ -253,11 +315,23 @@ function formatDate(date: string): string {
         if (match) visible++;
       });
 
+      // While filtering, open every year with a match so results are never
+      // hidden inside a collapsed year; restore the reader's own layout after.
+      const filtering = Boolean(q || state.venue);
+      if (filtering && !savedOpen) {
+        savedOpen = new Map(Array.from(yearSections).map(s => [s, (s as HTMLDetailsElement).open]));
+      }
       yearSections.forEach(section => {
         const anyVisible = Array.from(section.querySelectorAll<HTMLLIElement>('.bib-item'))
           .some(li => !li.hidden);
         section.hidden = !anyVisible;
+        if (filtering) (section as HTMLDetailsElement).open = anyVisible;
       });
+      if (!filtering && savedOpen) {
+        savedOpen.forEach((open, s) => { (s as HTMLDetailsElement).open = open; });
+        savedOpen = null;
+      }
+      syncToggle();
 
       // Empty-state messaging
       if (emptyMsg && emptyMsgText) {
@@ -348,6 +422,13 @@ function formatDate(date: string): string {
       if (searchInput) searchInput.value = initialQ;
     }
     if (state.venue || state.query) applyFilters();
+    // Deep link to a year (#year-2024) opens it.
+    const target = location.hash.match(/^#year-(\d{4})$/);
+    if (target) {
+      const d = document.querySelector<HTMLDetailsElement>(`details[data-year="${target[1]}"]`);
+      if (d) { d.open = true; d.scrollIntoView(); }
+    }
+    syncToggle();
   </script>
 
 </Base>

@@ -58,6 +58,22 @@
     "url": "https://www.adexchanger.com/data-driven-thinking/three-advertising-industry-myths-the-market-has-already-debunked/"
   },
   {
+    "date": "2026-07-15",
+    "venue": "ADWEEK",
+    "title": "IP-Based CTV Targeting Fails 3 In Every 4 Times, New Research Finds",
+    "type": "Quoted",
+    "synopsis": "Quoted on identity: the industry should be more honest about its confidence in the signals it uses, and treat identity quality as a measurable standard rather than an assumption.",
+    "url": "https://www.adweek.com/convergent-tv/ip-based-ctv-targeting-fails-3-in-every-4-times-new-research-finds/"
+  },
+  {
+    "date": "2026-07-07",
+    "venue": "Digiday",
+    "title": "Ad Tech Briefing: Corporate America finally buys into soccer as a mainstream sport; shadier elements of the ad industry are obliging",
+    "type": "Quoted",
+    "synopsis": "Quoted on CTV sports inventory: supply is not meeting demand, high-value inventory has always attracted bad actors, and CTV’s lack of transparency gives them room.",
+    "url": "https://digiday.com/media-buying/ad-tech-briefing-corporate-america-finally-buys-into-soccer-as-a-mainstream-sport-shadier-elements-of-the-ad-industry-are-obliging/"
+  },
+  {
     "date": "2026-07-06",
     "venue": "AdExchanger",
     "title": "CTV Buyers Are Getting The Show-Level Performance Optimization They’ve Always Wanted",
@@ -80,6 +96,24 @@
     "type": "Quoted",
     "synopsis": "Quoted on certification and media quality as one of adland’s most influential accreditors shows signs of strain.",
     "url": "https://www.adweek.com/media/tag-loses-ground-as-pg-drops-mandate-and-google-trade-desk-ditch-certifications/"
+  },
+  {
+    "date": "2026-05-26",
+    "venue": "Curation Conversations",
+    "title": "Linear Thinking Meets CTV Reality / What Actually Makes CTV Work",
+    "type": "Podcast",
+    "synopsis": "Two-part conversation on the relationship between linear and CTV, planning and transparency challenges, and what advertisers need to understand to make the channel work in practice.",
+    "url": "https://curationconversations.com/podcasts/part-1-linear-thinking-meets-ctv-reality",
+    "links": [
+      {
+        "label": "Part 1",
+        "url": "https://curationconversations.com/podcasts/part-1-linear-thinking-meets-ctv-reality"
+      },
+      {
+        "label": "Part 2",
+        "url": "https://curationconversations.com/podcasts/part-2-what-actually-makes-ctv-work"
+      }
+    ]
   },
   {
     "date": "2026-05-19",
@@ -154,6 +188,14 @@
     "url": "https://www.signalandnoise.ai/post/the-cost-of-keeping-quiet-ad-fraud-incentives-the-silence-protecting-billions-with-sarah-caputo"
   },
   {
+    "date": "2025-12-04",
+    "venue": "AdTechRadar",
+    "title": "Headed into 2026, Streaming Transparency Takes Center Stage",
+    "type": "Mention",
+    "synopsis": "Cites David’s AdExchanger column on CTV opacity as capturing advertisers’ growing impatience heading into 2026.",
+    "url": "https://adtechradar.com/2025/12/04/streaming-transparency-takes-center-stage/"
+  },
+  {
     "date": "2025-12-01",
     "venue": "AdExchanger",
     "title": "CTV Is Less Transparent Than YouTube. That Should Alarm Everyone",
@@ -202,6 +244,14 @@
     "url": "https://www.adweek.com/convergent-tv/linear-meets-ctv-intermedia-hires-digital-lead/"
   },
   {
+    "date": "2025-05-29",
+    "venue": "ADWEEK",
+    "title": "Prime Video Quietly Rolls Out Show-Level Ad Reporting",
+    "type": "Quoted",
+    "synopsis": "Quoted on Prime Video becoming the first streamer to offer real-time show-level reporting, and on how show-level pricing could recreate linear-style buying.",
+    "url": "https://www.adweek.com/convergent-tv/prime-video-show-level-ads/"
+  },
+  {
     "date": "2025-04-28",
     "venue": "AdExchanger",
     "title": "How Shutterfly Used A Search-Powered Custom Algorithm To Zoom In On New Customers",
@@ -210,12 +260,76 @@
     "url": "https://www.adexchanger.com/marketers/how-shutterfly-used-a-search-powered-custom-algorithm-to-zoom-in-on-new-customers/"
   },
   {
+    "date": "2025-04-14",
+    "venue": "Beet.TV",
+    "title": "CTV Advertising Faces a Transparency Reckoning, Says Rain’s Director Nyurenberg",
+    "type": "Video Interview",
+    "synopsis": "Video interview: when performance advertisers cannot see which channels, shows and networks they are buying, budgets drift back to Meta and Google.",
+    "url": "https://www.beet.tv/2025/04/ctv-advertising-faces-a-transparency-reckoning-says-rains-director-nyurenberg.html"
+  },
+  {
+    "date": "2025-03-18",
+    "venue": "CTV Connect",
+    "title": "Driving New Customer Growth for a Brand",
+    "type": "Panel",
+    "synopsis": "Session with Sara Moorthy at CTV Connect 2025 on whether brands can approach CTV like linear TV to drive incremental growth, and media mix modeling best practices.",
+    "url": "https://www.youtube.com/watch?v=NVJJMtvc2sg",
+    "links": [
+      {
+        "label": "Watch the session",
+        "url": "https://www.youtube.com/watch?v=NVJJMtvc2sg"
+      },
+      {
+        "label": "Cynopsis recap",
+        "url": "https://www.cynopsis.com/ctv-connect-2025-key-takeaways-from-the-industrys-leaders/"
+      }
+    ]
+  },
+  {
     "date": "2025-03-12",
     "venue": "Digiday",
     "title": "Advertisers put SSPs and curators under the microscope in sell-side push for ad tech fee transparency",
     "type": "Quoted",
     "synopsis": "Quoted discussing how his team separates tech, audience, and platform fees from working media spend to ensure dollars are actually making it to publishers.",
     "url": "https://digiday.com/marketing/advertisers-put-ssps-and-curators-under-the-microscope-in-sell-side-push-for-ad-tech-fee-transparency/"
+  },
+  {
+    "date": "2025-03-07",
+    "venue": "Digiday",
+    "title": "Marketers rethink cheap programmatic as ad waste mounts",
+    "type": "Quoted",
+    "synopsis": "Quoted on enforcing quality through SSP contracts that prohibit resold media and MFA sites, require ads.txt compliance and mandate make-goods.",
+    "url": "https://digiday.com/marketing/marketers-rethink-cheap-programmatic-as-ad-waste-mounts/"
+  },
+  {
+    "date": "2025-02-27",
+    "venue": "MediaPost",
+    "title": "CTV Transparency? The Search For ‘Show-Level’ Viewer Data",
+    "type": "Mention",
+    "synopsis": "Commentary citing Rain’s show-level CTV algorithm and David’s point that it yields a probabilistic, not deterministic, match.",
+    "url": "https://www.mediapost.com/publications/article/403718/ctv-transparency-the-search-for-show-level-view.html"
+  },
+  {
+    "date": "2025-02-25",
+    "venue": "VideoNuze",
+    "title": "CTV x AI Preview 2025: Exploring How AI is Influencing CTV’s Effectiveness",
+    "type": "Panel",
+    "synopsis": "Virtual panel with FreeWheel, AWS, Alpha Precision Media and the VAB on how AI is changing CTV planning, placement and outcomes.",
+    "url": "https://www.videonuze.com/article/video-exploring-how-ai-is-influencing-ctv-s-effectiveness/",
+    "links": [
+      {
+        "label": "Full panel",
+        "url": "https://www.videonuze.com/article/video-exploring-how-ai-is-influencing-ctv-s-effectiveness/"
+      },
+      {
+        "label": "Clip: AI for business outcomes",
+        "url": "https://www.youtube.com/watch?v=HVhMNRiujRA"
+      },
+      {
+        "label": "Clip: AI and media placement",
+        "url": "https://www.youtube.com/watch?v=_5inAh1VroI"
+      }
+    ]
   },
   {
     "date": "2025-02-24",
@@ -234,12 +348,44 @@
     "url": "https://www.adexchanger.com/data-driven-thinking/the-race-to-the-bottom-is-over-advertisers-care-about-quality-again/"
   },
   {
+    "date": "2024-10-24",
+    "venue": "Digiday",
+    "title": "The evolution of the great ‘curation’ tussle in ad tech",
+    "type": "Quoted",
+    "synopsis": "Quoted on the questions buyers should ask of companies built specifically for curation.",
+    "url": "https://digiday.com/media-buying/the-evolution-of-the-great-curation-tussle-in-ad-tech/"
+  },
+  {
+    "date": "2024-10-08",
+    "venue": "AdExchanger",
+    "title": "Buyers Can Now Target High-Attention Inventory In The Trade Desk",
+    "type": "Quoted",
+    "synopsis": "Quoted on Rain’s beta test of Adelaide attention scoring in The Trade Desk, and how attention metrics help avoid MFA sites and outstream video.",
+    "url": "https://www.adexchanger.com/technology/buyers-can-now-target-high-attention-inventory-in-the-trade-desk/"
+  },
+  {
     "date": "2024-07-10",
     "venue": "AdExchanger",
     "title": "The Golden Calf Of Addressability: Reevaluating The Foundations Of Digital Advertising",
     "type": "Authored",
     "synopsis": "Data-Driven Thinking column calling for the industry to move past its addiction to addressable targeting and deterministic attribution.",
     "url": "https://www.adexchanger.com/marketers/the-golden-calf-of-addressability-reevaluating-the-foundations-of-digital-advertising-2/"
+  },
+  {
+    "date": "2024-06-13",
+    "venue": "Marketing Brew",
+    "title": "Streamers keep leaning in on shoppable ads. Who will get it right?",
+    "type": "Quoted",
+    "synopsis": "Quoted that shoppable CTV ads are “rarely—if ever—worth the upcharge.”",
+    "url": "https://www.marketingbrew.com/stories/2024/06/13/streamers-keep-outing-shoppable-ads"
+  },
+  {
+    "date": "2024-02-27",
+    "venue": "Roku Advertising",
+    "title": "Roku ads deliver 3.4x return-on-ad-spend for retail DTC brand",
+    "type": "Quoted",
+    "synopsis": "Case study quote on CTV’s potential to match conversion-focused channels like social and search.",
+    "url": "https://advertising.roku.com/learn/resources/roku-ads-deliver-3-4x-return-on-ad-spend-for-retail-dtc-brand"
   },
   {
     "date": "2024-02-12",
@@ -250,11 +396,67 @@
     "url": "https://digiday.com/media-buying/the-trade-desk-is-rolling-out-openpath-to-ctv/"
   },
   {
+    "date": "2023-08-07",
+    "venue": "ADWEEK",
+    "title": "Buyers Are Still Struggling to Know Where Their Ads Ran",
+    "type": "Quoted",
+    "synopsis": "Quoted that show-level data is present for only 4% to 10% of open-exchange CTV impressions, and on buying against quality scores with custom algorithms.",
+    "url": "https://www.adweek.com/programmatic/buyers-are-still-struggling-to-know-where-their-ads-ran/"
+  },
+  {
     "date": "2021-02-08",
     "venue": "Trust Web Times",
     "title": "Trust Web Times Interview Series: David Nyurenberg",
     "type": "Interview",
     "synopsis": "An in-depth interview exploring Nyurenberg's early career at Gameloft, his time at programmatic managed service vendors, and the founding of his self-funded consultancy Valor.",
     "url": "https://trustwebtimes.com/trust-web-times-interview-series-david-nyurenberg-valor/"
+  },
+  {
+    "date": "2020-12-03",
+    "venue": "The Media Nut",
+    "title": "LinkedIn has an ad measurement problem",
+    "type": "Feature",
+    "synopsis": "Josh Sternberg’s newsletter opens with David’s own LinkedIn campaign for Valor Digital as the case study for a measurement class action.",
+    "url": "https://medianut.substack.com/p/linkedin-has-an-ad-measurement-problem"
+  },
+  {
+    "date": "2020-08-10",
+    "venue": "Valor Digital",
+    "title": "The Digital Marketer’s Manifesto: Why Our Industry Must Embrace Disruption to Survive",
+    "type": "Authored",
+    "synopsis": "Essay on why digital advertising has to embrace disruption, written with a contribution from Robert Webster.",
+    "url": "https://www.govalordigital.net/blog/the-digital-marketers-manifesto-why-our-industry-must-embrace-disruption-to-survive"
+  },
+  {
+    "date": "2020-07-16",
+    "venue": "Valor Digital",
+    "title": "The Future of Ad Tech",
+    "type": "Authored",
+    "synopsis": "Five companies building a sustainable, value-driven digital advertising future.",
+    "url": "https://www.govalordigital.net/blog/i6p7niyivbrhtj2o1mzklczd61etzs"
+  },
+  {
+    "date": "2020-06-11",
+    "venue": "PR Newswire",
+    "title": "Valor Digital Announces Industry-Leading Advisory Board Members on Global Scale",
+    "type": "Press Release",
+    "synopsis": "Quoted as Valor founder announcing six industry leaders joining the advisory board.",
+    "url": "https://www.prnewswire.com/news-releases/valor-digital-announces-industry-leading-advisory-board-members-on-global-scale-301074139.html"
+  },
+  {
+    "date": "2020-06-09",
+    "venue": "PR Newswire",
+    "title": "Valor Digital Announces New Breed of Digital Marketing Partner Aimed at Strengthening & Streamlining In-House Brand and Agency Experience",
+    "type": "Press Release",
+    "synopsis": "Launch of Valor Digital, which David pitched as the industry’s first “digital agent” for brands that want to stay in control of their execution.",
+    "url": "https://www.prnewswire.com/news-releases/valor-digital-announces-new-breed-of-digital-marketing-partner-aimed-at-strengthening--streamlining-in-house-brand-and-agency-experience-301072719.html"
+  },
+  {
+    "date": "2020-05-05",
+    "venue": "Valor Digital",
+    "title": "Quick Wins for the Savvy Marketer in You",
+    "type": "Authored",
+    "synopsis": "Co-authored with Dr. Augustine Fou: practical moves for marketers who paused or cut digital spend at the start of the pandemic.",
+    "url": "https://www.govalordigital.net/blog/quick-wins-for-the-savvy-marketer-in-you"
   }
 ]
