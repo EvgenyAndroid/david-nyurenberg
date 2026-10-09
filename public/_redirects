@@ -1,5 +1,3 @@
 # /future was the redesign preview; it became the home page on 2026-10-09.
-/future                /                301
-/future/               /                301
-/future/ideas/:slug    /ideas/:slug/    301
-/future/ideas/:slug/   /ideas/:slug/    301
+/future      /          301
+/future/*    /:splat    301

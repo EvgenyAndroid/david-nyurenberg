@@ -1,0 +1,15 @@
+---
+import Base from '../layouts/Base.astro';
+import FutureNav from '../components/FutureNav.astro';
+import '../styles/future.css';
+---
+<Base title="Page not found" noindex>
+  <FutureNav />
+  <section class="ihero ihero--transparency">
+    <div class="shell">
+      <span class="ihero__num">404</span>
+      <h1 class="ihero__title">Nothing ran here.</h1>
+      <p class="ihero__thesis">This page doesn’t exist. Try the <a href="/">home page</a> or the <a href="/archive/">full archive</a>.</p>
+    </div>
+  </section>
+</Base>
