@@ -56,16 +56,21 @@ search page.
 
 ## Deploy
 
-1. Push to GitHub (any branch — main is the default deploy branch).
-2. In Cloudflare Pages, create a project connected to this repo.
-3. Build settings:
-   - Build command: `npm run build`
-   - Output directory: `dist`
-   - Node version: `22.12.0` or higher
-4. Add the custom domain `david-nyurenberg.com` under
-   Pages → Custom domains.
+Every push to `main` runs `.github/workflows/deploy.yml`, which builds the
+site and uploads `dist/` to the `david-nyurenberg` Cloudflare Pages project
+with Wrangler. It needs one repo secret, `CLOUDFLARE_API_TOKEN`, scoped to
+**Account → Cloudflare Pages → Edit**. You can also run it by hand from the
+Actions tab.
 
-CF will issue an SSL cert automatically.
+To deploy from your own machine instead:
+
+```powershell
+npm run build
+npx wrangler pages deploy dist --project-name david-nyurenberg --branch main
+```
+
+The custom domain `david-nyurenberg.com` is attached under Pages → Custom
+domains.
 
 ## Brand
 
