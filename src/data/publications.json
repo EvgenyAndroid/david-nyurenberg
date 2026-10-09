@@ -46,6 +46,18 @@
     "url": "https://newyork2026.advertisingweek.com/aw/schedule/session/-731-2026-10-06-1100-session"
   },
   {
+    "date": "2026-09-29",
+    "venue": "Programmatic I/O",
+    "title": "We Measured Everything, Except Whether We Got What We Wanted: A Practical Playbook for Media Accountability",
+    "type": "Panel",
+    "themes": [
+      "incentives",
+      "measurement"
+    ],
+    "synopsis": "Session with Bayer’s Gary Guarnaccia on the gap between what the supply chain declares, what platforms report and what is delivered, and why verification, fraud detection, supply path reporting and inclusion lists are necessary but not enough.",
+    "url": "https://www.adexchanger.com/go/programmatic-i-o-2026-new-york/"
+  },
+  {
     "date": "2026-09-22",
     "venue": "State of Streaming",
     "title": "How Direct CTV Buys Become Programmatic Winners",
@@ -362,6 +374,17 @@
     ]
   },
   {
+    "date": "2025-07-18",
+    "venue": "The Information",
+    "title": "The Education of Roku’s Anthony Wood",
+    "type": "Quoted",
+    "themes": [
+      "career"
+    ],
+    "synopsis": "Quoted in The Information’s profile of Roku founder and CEO Anthony Wood.",
+    "url": "https://www.theinformation.com/articles/education-rokus-anthony-wood"
+  },
+  {
     "date": "2025-07-09",
     "venue": "AdExchanger",
     "title": "CTV Is Not A One-To-One Channel, So Stop Buying It Like One",
@@ -622,7 +645,7 @@
     "url": "https://www.rainagency.com/insights-updates/case-study-leveraging-metadata-optimization-in-connected-tv-advertising/"
   },
   {
-    "date": "2024-04-23",
+    "date": "2024-05",
     "venue": "VAB",
     "title": "Revolutionizing CTV with Custom AI Algorithms: Driving Performance with Premium CTV Publishers",
     "type": "Panel",

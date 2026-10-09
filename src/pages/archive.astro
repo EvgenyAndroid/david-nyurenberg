@@ -212,8 +212,8 @@ function formatDate(date: string): string {
             <summary class="year-section__summary" id={`year-${year}`}>
               <h2 class="year-section__heading">{year}</h2>
               <span class="year-section__meta">
-                <span class="year-section__count">{all.filter(e => e.date.startsWith(year)).length}</span>
-                <span class="year-section__breakdown">{yearSummary(year)}</span>
+                <span class="year-section__count" data-total={all.filter(e => e.date.startsWith(year)).length}>{all.filter(e => e.date.startsWith(year)).length}</span>
+                <span class="year-section__breakdown" data-all={yearSummary(year)}>{yearSummary(year)}</span>
               </span>
               <span class="year-section__chevron" aria-hidden="true"></span>
             </summary>
@@ -226,6 +226,7 @@ function formatDate(date: string): string {
                   <li
                     class="bib-item"
                     data-venue={e.venue}
+                    data-type={e.type || 'Other'}
                     data-search={haystack}
                   >
                     <a
@@ -336,6 +337,22 @@ function formatDate(date: string): string {
           .some(li => !li.hidden);
         section.hidden = !anyVisible;
         if (filtering) (section as HTMLDetailsElement).open = anyVisible;
+
+        // Year header follows the filter: "5 of 14" and a breakdown of only
+        // the matching entries; back to the full totals when cleared.
+        const countEl = section.querySelector<HTMLElement>('.year-section__count');
+        const breakdownEl = section.querySelector<HTMLElement>('.year-section__breakdown');
+        const shown = Array.from(section.querySelectorAll<HTMLLIElement>('.bib-item')).filter(li => !li.hidden);
+        if (countEl) countEl.textContent = filtering ? `${shown.length} of ${countEl.dataset.total}` : countEl.dataset.total || '';
+        if (breakdownEl) {
+          if (!filtering) breakdownEl.textContent = breakdownEl.dataset.all || '';
+          else {
+            const counts: Record<string, number> = {};
+            shown.forEach(li => { const t = li.dataset.type || 'Other'; counts[t] = (counts[t] || 0) + 1; });
+            breakdownEl.textContent = Object.entries(counts).sort(([, a], [, b]) => b - a)
+              .map(([t, n]) => `${n} ${t.toLowerCase()}`).join(' · ');
+          }
+        }
       });
       if (!filtering && savedOpen) {
         savedOpen.forEach((open, s) => { (s as HTMLDetailsElement).open = open; });
