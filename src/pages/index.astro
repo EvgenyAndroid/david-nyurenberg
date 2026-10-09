@@ -85,11 +85,37 @@ const venues = new Set(all.map(e => e.venue)).size;
         ))}
       </div>
       <div class="awards">
-        <span class="awards__label">2026 AdExchanger Awards · InterMedia Advertising</span>
-        <ul>
-          {awards.wins.map(w => <li><strong>Winner, {w.category}.</strong> {w.entry}.</li>)}
-        </ul>
-        <a href={awards.url} target="_blank" rel="noopener">All winners ↗</a>
+        <div class="awards__text">
+          <span class="awards__label">2026 AdExchanger Awards · InterMedia Advertising</span>
+          <ul>
+            {awards.wins.map(w => (
+              <li>
+                <span class="awards__win">Winner</span>
+                <strong>{w.category}</strong>
+                <span>{w.entry}</span>
+              </li>
+            ))}
+          </ul>
+          <a href={awards.url} target="_blank" rel="noopener">All winners on AdExchanger ↗</a>
+        </div>
+        <div class="awards__photos">
+          <a class="shot shot--tall" href="/awards/team.jpg" target="_blank" rel="noopener">
+            <picture>
+              <source srcset="/awards/team-thumb.webp" type="image/webp" />
+              <img src="/awards/team-thumb.jpg" width="560" height="769" loading="lazy" decoding="async"
+                alt="David Nyurenberg, second from left, with InterMedia colleagues and the trophy at the 2026 AdExchanger Awards" />
+            </picture>
+            <span class="shot__cap">On the night</span>
+          </a>
+          <a class="shot" href="/awards/trophies.jpg" target="_blank" rel="noopener">
+            <picture>
+              <source srcset="/awards/trophies-thumb.webp" type="image/webp" />
+              <img src="/awards/trophies-thumb.jpg" width="560" height="645" loading="lazy" decoding="async"
+                alt="The two 2026 AdExchanger Awards trophies presented to InterMedia Advertising" />
+            </picture>
+            <span class="shot__cap">Two trophies</span>
+          </a>
+        </div>
       </div>
     </div>
   </section>
