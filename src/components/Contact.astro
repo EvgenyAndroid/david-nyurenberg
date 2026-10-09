@@ -1,0 +1,37 @@
+---
+// Speaking / advisory / press block. Shared by the home page and every
+// argument page. Bio facts come from his published press (InterMedia
+// appointment release, ADWEEK hire story, AdExchanger winners page).
+import { ideas } from '../data/ideas';
+const { compact = false } = Astro.props as { compact?: boolean };
+const LINKEDIN = 'https://www.linkedin.com/in/david-nyurenberg-1b56578b/';
+---
+<section class:list={['contact', { 'contact--compact': compact }]} id="contact">
+  <div class="shell contact__grid">
+    <div>
+      <span class="fsection__label">Speaking, advisory &amp; press</span>
+      <h2 class="contact__title">Book David for a stage, a podcast or a story.</h2>
+      {!compact && (
+        <p class="contact__bio">
+          David Nyurenberg is SVP, Digital at InterMedia Advertising, where his team’s show-level CTV
+          framework won AdExchanger’s 2026 award for Most Innovative Use of CTV Technology. He previously
+          led video product development and innovation at Rain the Growth Agency, founded the consultancy
+          Valor Digital, and began his career on the publisher side at Gameloft. He writes regularly for
+          AdExchanger and speaks on CTV transparency, measurement and agentic buying.
+        </p>
+      )}
+      <ul class="contact__topics">
+        {ideas.map(i => <li><a href={`/ideas/${i.slug}/`}>{i.title}</a></li>)}
+      </ul>
+    </div>
+    <div class="contact__actions">
+      <a class="fcta__btn" href={LINKEDIN} target="_blank" rel="noopener">Message on LinkedIn →</a>
+      {!compact && (
+        <>
+          <a class="contact__link" href="/david-nyurenberg-headshot.jpg" download>Download headshot (JPG) ↓</a>
+          <a class="contact__link" href="/archive/">Full press archive →</a>
+        </>
+      )}
+    </div>
+  </div>
+</section>

@@ -1,144 +1,41 @@
 ---
 import Base from '../layouts/Base.astro';
+import FutureNav from '../components/FutureNav.astro';
+import EvidenceItem from '../components/EvidenceItem.astro';
+import Contact from '../components/Contact.astro';
 import publications from '../data/publications.json';
-import linkedinUrls from '../data/linkedin-urls.json';
+import { ideas, proof, awards, type Theme } from '../data/ideas';
+import '../styles/future.css';
 
-// ─── LinkedIn / per-piece deep-link resolver ─────────────────────────────
-// Maps each known piece to its specific URL (LinkedIn /pulse, Medium, etc.).
-// Two lookups: byEssaySlug (if you have a stable slug) and byTitleKey
-// (fuzzy normalized title match). Both defined in src/data/linkedin-urls.json.
-function titleKey(s: string): string {
-  return s
-    .toLowerCase()
-    .replace(/[‘’']/g, '')
-    .replace(/[“”"]/g, '')
-    .replace(/[—–:,!?.]/g, ' ')
-    .replace(/[^a-z0-9\s]/g, ' ')
-    .replace(/\s+/g, ' ')
-    .trim();
-}
-function deepLink(slug: string | undefined, title: string): string | null {
-  if (slug && (linkedinUrls.byEssaySlug as any)[slug]) return (linkedinUrls.byEssaySlug as any)[slug];
-  const key = titleKey(title);
-  if ((linkedinUrls.byTitleKey as any)[key]) return (linkedinUrls.byTitleKey as any)[key];
-  return null;
-}
+type Entry = { date: string; venue: string; title: string; type?: string; themes?: Theme[] };
+const all = (publications as Entry[]).slice().sort((a, b) => b.date.localeCompare(a.date));
 
-// ─── External-venue search-page fallback ─────────────────────────────────
-// When a piece doesn't have a known direct URL, link to the venue's author
-// or search page pre-filled with the title — user lands on the venue and
-// clicks the actual article. One extra click but no broken links.
-function searchTerm(title: string): string {
-  return title
-    .replace(/[—–-]/g, ' ')
-    .replace(/[^\w\s]/g, ' ')
-    .split(/\s+/).filter(Boolean).slice(0, 8).join(' ');
-}
-function externalUrl(entry: any): string | null {
-  const deep = deepLink(entry.slug, entry.title);
-  if (deep) return deep;
-  const q = encodeURIComponent(searchTerm(entry.title));
-  switch (entry.venue) {
-    case 'LinkedIn':         return 'https://www.linkedin.com/';
-    case 'Medium':           return `https://medium.com/search?q=${q}`;
-    case 'Forbes':           return 'https://www.forbes.com/';
-    case 'Substack':         return 'https://substack.com/';
-    default:                 return null;
-  }
-}
-
-// ─── Pub entry shape ─────────────────────────────────────────────────────
-type Entry = {
-  date: string;     // YYYY-MM or YYYY-MM-DD
-  venue: string;
-  title: string;
-  subtitle?: string | null;
-  synopsis?: string;
-  /** Free-form type label rendered as an eyebrow tag on each entry.
-   *  Examples: Interview, Quoted, Authored, Podcast, Feature, Press Release,
-   *  Video Interview, Mention. */
-  type?: string;
-  slug?: string;
-  url?: string;     // explicit per-entry URL (overrides resolver)
-  /** Extra links for an entry with more than one format (e.g. podcast +
-   *  written interview). Rendered as a row under the card. */
-  links?: { label: string; url: string }[];
+const statsFor = (t: Theme) => {
+  const hits = all.filter(e => e.themes?.includes(t));
+  return { count: hits.length, since: hits.map(e => e.date.slice(0, 4)).sort()[0] };
 };
-
-const all = (publications as Entry[])
-  .slice()
-  .sort((a, b) => (b.date || '').localeCompare(a.date || ''));
-
-function urlFor(e: Entry): string {
-  if (e.url) return e.url;
-  return externalUrl(e) || '#';
-}
-
-// ─── Year grouping (newest first) ───────────────────────────────────────
-const years = Array.from(new Set(all.map(e => (e.date || '').slice(0, 4))))
-  .filter(Boolean)
-  .sort((a, b) => b.localeCompare(a));
-
-// ─── Venues + counts for filter chips ────────────────────────────────────
-const venueCounts: Record<string, number> = {};
-all.forEach(e => {
-  venueCounts[e.venue] = (venueCounts[e.venue] || 0) + 1;
-});
-const venuesSortedByCount = Object.entries(venueCounts)
-  .sort(([, a], [, b]) => b - a);
-
-// ─── Per-year summary + headline stats ──────────────────────────────────
-const latestYear = years[0];
-function yearSummary(year: string): string {
-  const counts: Record<string, number> = {};
-  all.filter(e => e.date.startsWith(year)).forEach(e => {
-    const t = e.type || 'Other';
-    counts[t] = (counts[t] || 0) + 1;
-  });
-  return Object.entries(counts)
-    .sort(([, a], [, b]) => b - a)
-    .map(([t, n]) => `${n} ${t.toLowerCase()}`)
-    .join(' · ');
-}
-const authoredCount = all.filter(e => e.type === 'Authored').length;
-const spokenCount = all.filter(e => ['Podcast', 'Panel', 'Video Interview', 'Interview'].includes(e.type || '')).length;
-const firstYear = years[years.length - 1];
-
-function formatDate(date: string): string {
-  if (!date) return '';
-  const [y, m] = date.split('-');
-  if (!m) return y;
-  const monthNames = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
-  return `${monthNames[parseInt(m, 10) - 1] || ''} ${y}`;
-}
+// Two standout lines; the rest live on the argument pages.
+const quotes = [ideas[0].quotes[0], ideas[1].quotes[1]].map((q, n) => ({ ...q, idea: ideas[n] }));
+const venues = new Set(all.map(e => e.venue)).size;
 ---
-<Base
-  title="David Nyurenberg"
-  description={`Selected bylines and published work by David Nyurenberg across ${venuesSortedByCount.length || 'multiple'} publications.`}
->
+<Base title="David Nyurenberg"
+  description="David Nyurenberg on making connected TV accountable: show-level transparency, honest measurement, aligned incentives and agentic buying.">
+  <FutureNav />
 
-  <!-- ─── Hero ─── -->
-  <section class="hero">
-    <div class="shell hero__grid">
-      <div class="hero__text">
-        <span class="eyebrow">Writing & Press</span>
-        <h1 class="display">David<br/>Nyurenberg<span class="dot">.</span></h1>
-        <p class="hero__role">SVP, Digital · <strong>InterMedia Advertising</strong></p>
-        <p class="hero__sub">
-          {all.length > 0 ? (
-            <>Selected bylines, interviews, podcasts, and press across <strong>{venuesSortedByCount.length}</strong> publications. <strong>{all.length}</strong> entries.</>
-          ) : (
-            <>Selected bylines and published work. <em>(Content loading.)</em></>
-          )}
+  <header class="fhero">
+    <div class="shell fhero__grid">
+      <div>
+        <span class="eyebrow">SVP, Digital · InterMedia Advertising</span>
+        <h1 class="fhero__title">Make streaming<br/>accountable<span class="dot">.</span></h1>
+        <p class="fhero__lede">
+          David Nyurenberg buys television for performance advertisers and argues, in print and on stage,
+          that streaming should be bought like television: <em>by the show</em>, <em>for the household</em>,
+          with the <em>incentives in plain sight</em>, and with AI agents that make operators sharper.
         </p>
-        {all.length > 0 && (
-          <dl class="hero__stats">
-            <div><dt>Entries</dt><dd>{all.length}</dd></div>
-            <div><dt>Authored</dt><dd>{authoredCount}</dd></div>
-            <div><dt>On air &amp; stage</dt><dd>{spokenCount}</dd></div>
-            <div><dt>Since</dt><dd>{firstYear}</dd></div>
-          </dl>
-        )}
+        <div class="fhero__actions">
+          <a class="fcta__btn" href="#contact">Speaking &amp; press</a>
+          <a class="fhero__link" href="#arguments">Read the four arguments ↓</a>
+        </div>
       </div>
       <figure class="portrait">
         <span class="portrait__echo" aria-hidden="true"></span>
@@ -146,289 +43,86 @@ function formatDate(date: string): string {
           <source srcset="/david.webp" type="image/webp" />
           <img src="/david.jpg" alt="David Nyurenberg" width="720" height="720" loading="eager" decoding="async" />
         </picture>
-        <figcaption class="portrait__caption" aria-hidden="true">CTV · Programmatic · Transparency</figcaption>
       </figure>
+    </div>
+  </header>
+
+  <section class="fsection" id="arguments">
+    <div class="shell">
+      <h2 class="fsection__label">Four arguments</h2>
+      <div class="cards">
+        {ideas.map(i => {
+          const s = statsFor(i.theme);
+          return (
+            <a class={`card card--${i.theme}`} href={`/ideas/${i.slug}/`}>
+              <span class="card__num">{i.num}</span>
+              <h3 class="card__title">{i.title}</h3>
+              <p class="card__thesis">{i.thesis}</p>
+              <span class="card__meta">{s.count} pieces · {i.sinceNote ?? `related work since ${s.since}`} <span aria-hidden="true">→</span></span>
+            </a>
+          );
+        })}
+      </div>
     </div>
   </section>
 
-  {all.length > 0 ? (
-    <!-- ─── Search + filter strip ─── -->
-    <section class="archive">
-      <div class="shell">
-        <!-- Search input -->
-        <div class="search-row" data-search-row>
-          <label for="bib-search" class="visually-hidden">Search bylines</label>
-          <div class="search-wrap">
-            <svg class="search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true">
-              <circle cx="11" cy="11" r="7" />
-              <line x1="20" y1="20" x2="16.5" y2="16.5" />
-            </svg>
-            <input
-              id="bib-search"
-              type="search"
-              class="search-input"
-              placeholder={`Search ${all.length} bylines by title, venue, synopsis…`}
-              autocomplete="off"
-              data-search-input
-            />
-            <button type="button" class="search-clear" data-search-clear hidden aria-label="Clear search">×</button>
-          </div>
-          <span class="search-count" data-search-count hidden></span>
-        </div>
-
-        <!-- Venue filter chips -->
-        <div class="venue-filter" role="group" aria-label="Filter by publication" data-filter>
-          <button class="venue-chip is-active" data-venue="" aria-pressed="true" type="button">
-            <span class="venue-chip__name">All</span>
-            <span class="venue-chip__count">{all.length}</span>
-          </button>
-          {venuesSortedByCount.map(([venue, count]) => (
-            <button class="venue-chip" data-venue={venue} aria-pressed="false" type="button">
-              <span class="venue-chip__name">{venue}</span>
-              <span class="venue-chip__count">{count}</span>
-            </button>
-          ))}
-        </div>
-        <p class="filter-empty" data-filter-empty hidden>
-          <span data-filter-empty-msg>No entries match this filter.</span>
-        </p>
-
-        <!-- Bibliography by year -->
-        <div class="year-tools">
-          <button type="button" class="year-toggle" data-year-toggle>Expand all years</button>
-        </div>
-        {years.map(year => (
-          <details class="year-section" data-year={year} open={year === latestYear}>
-            <summary class="year-section__summary" id={`year-${year}`}>
-              <h2 class="year-section__heading">{year}</h2>
-              <span class="year-section__meta">
-                <span class="year-section__count">{all.filter(e => e.date.startsWith(year)).length}</span>
-                <span class="year-section__breakdown">{yearSummary(year)}</span>
-              </span>
-              <span class="year-section__chevron" aria-hidden="true"></span>
-            </summary>
-            <ul class="bib-list">
-              {all.filter(e => (e.date || '').startsWith(year)).map(e => {
-                const href = urlFor(e);
-                const external = href !== '#';
-                const haystack = `${e.title} ${e.venue} ${e.synopsis || ''} ${e.subtitle || ''}`.toLowerCase();
-                return (
-                  <li
-                    class="bib-item"
-                    data-venue={e.venue}
-                    data-search={haystack}
-                  >
-                    <a
-                      href={href}
-                      class="bib-link"
-                      {...(external ? { target: '_blank', rel: 'noopener' } : {})}
-                    >
-                      <div class="bib-meta">
-                        {e.type && (
-                          <>
-                            <span class={`bib-type bib-type--${e.type.toLowerCase().replace(/\s+/g, '-')}`}>{e.type}</span>
-                            <span class="bib-sep">·</span>
-                          </>
-                        )}
-                        <span class="bib-date">{formatDate(e.date)}</span>
-                        <span class="bib-sep">·</span>
-                        <span class="bib-venue">{e.venue}</span>
-                      </div>
-                      <div class="bib-title">{e.title}</div>
-                      {e.subtitle && <div class="bib-subtitle">{e.subtitle}</div>}
-                      {e.synopsis && <div class="bib-synopsis">{e.synopsis}</div>}
-                      {external && <span class="bib-arrow" aria-hidden="true">↗</span>}
-                    </a>
-                    {e.links && e.links.length > 0 && (
-                      <div class="bib-links">
-                        {e.links.map(l => (
-                          <a href={l.url} target="_blank" rel="noopener">{l.label} ↗</a>
-                        ))}
-                      </div>
-                    )}
-                  </li>
-                );
-              })}
-            </ul>
-          </details>
+  <section class="fsection fsection--ink">
+    <div class="shell">
+      <h2 class="fsection__label">Work with outcomes</h2>
+      <div class="proof">
+        {proof.map(p => (
+          <a class="proof__item" href={p.url} target="_blank" rel="noopener">
+            <span class="proof__year">{p.year} · {p.org}</span>
+            <h3>{p.title}</h3>
+            <p>{p.body}</p>
+            {p.stats && (
+              <dl class="proof__stats">
+                {p.stats.map(st => <div><dt>{st.v}</dt><dd>{st.l}</dd></div>)}
+              </dl>
+            )}
+            <span class="proof__src">{p.source} ↗</span>
+          </a>
         ))}
-
-        <!-- LinkedIn activity note — short-cycle posts don't get archived
-             individually; this points readers to the live feed. -->
-        <aside class="linkedin-note">
-          <p>
-            <strong>Also active on LinkedIn.</strong> Direct links to specific
-            posts cycle through the feed quickly, but ongoing commentary
-            lives on the
-            <a href="https://www.linkedin.com/in/david-nyurenberg-1b56578b/recent-activity/all/" target="_blank" rel="noopener">profile activity feed →</a>
-          </p>
-        </aside>
       </div>
-    </section>
-  ) : (
-    <section class="empty-state">
-      <div class="shell">
-        <p>Content loading. Publications will appear here.</p>
+      <div class="awards">
+        <span class="awards__label">2026 AdExchanger Awards · InterMedia Advertising</span>
+        <ul>
+          {awards.wins.map(w => <li><strong>Winner, {w.category}.</strong> {w.entry}.</li>)}
+        </ul>
+        <a href={awards.url} target="_blank" rel="noopener">All winners ↗</a>
       </div>
-    </section>
-  )}
+    </div>
+  </section>
 
-  <script>
-    // ─── Search + venue filter ──────────────────────────────────────────
-    const buttons = document.querySelectorAll<HTMLButtonElement>('[data-filter] [data-venue]');
-    const items = document.querySelectorAll<HTMLLIElement>('.bib-item');
-    const yearSections = document.querySelectorAll<HTMLElement>('.year-section');
-    const emptyMsg = document.querySelector<HTMLElement>('[data-filter-empty]');
-    const emptyMsgText = document.querySelector<HTMLElement>('[data-filter-empty-msg]');
-    const searchInput = document.querySelector<HTMLInputElement>('[data-search-input]');
-    const searchClear = document.querySelector<HTMLButtonElement>('[data-search-clear]');
-    const searchCount = document.querySelector<HTMLElement>('[data-search-count]');
+  <section class="fsection">
+    <div class="shell">
+      <h2 class="fsection__label">In his words</h2>
+      <div class="quotes">
+        {quotes.map(q => (
+          <figure class={`quote quote--${q.idea.theme}`}>
+            <blockquote>“{q.text}”</blockquote>
+            <figcaption>
+              <a href={q.url} target="_blank" rel="noopener">{q.source}</a>
+              <span> · </span>
+              <a href={`/ideas/${q.idea.slug}/`}>{q.idea.title.replace(/\.$/, '')}</a>
+            </figcaption>
+          </figure>
+        ))}
+      </div>
+    </div>
+  </section>
 
-    const state = { venue: '', query: '' };
-    let savedOpen: Map<Element, boolean> | null = null;
+  <section class="fsection">
+    <div class="shell">
+      <div class="fsection__head">
+        <h2 class="fsection__label">Latest</h2>
+        <a href="/archive/" class="fsection__more">All {all.length} entries across {venues} outlets →</a>
+      </div>
+      <ul class="evlist">
+        {all.slice(0, 6).map(e => <EvidenceItem entry={e as any} />)}
+      </ul>
+    </div>
+  </section>
 
-    // ─── Expand / collapse all years ────────────────────────────────────
-    const yearToggle = document.querySelector<HTMLButtonElement>('[data-year-toggle]');
-    const details = () => Array.from(yearSections) as HTMLDetailsElement[];
-    function syncToggle() {
-      if (!yearToggle) return;
-      const allOpen = details().filter(d => !d.hidden).every(d => d.open);
-      yearToggle.textContent = allOpen ? 'Collapse earlier years' : 'Expand all years';
-      yearToggle.dataset.allOpen = String(allOpen);
-    }
-    yearToggle?.addEventListener('click', () => {
-      const open = yearToggle.dataset.allOpen !== 'true';
-      details().forEach((d, i) => { d.open = open || i === 0; });
-      syncToggle();
-    });
-    details().forEach(d => d.addEventListener('toggle', syncToggle));
-
-    function applyFilters() {
-      const q = state.query.trim().toLowerCase();
-      let visible = 0;
-
-      items.forEach(li => {
-        const venueOk = !state.venue || li.dataset.venue === state.venue;
-        const searchOk = !q || (li.dataset.search || '').includes(q);
-        const match = venueOk && searchOk;
-        li.hidden = !match;
-        if (match) visible++;
-      });
-
-      // While filtering, open every year with a match so results are never
-      // hidden inside a collapsed year; restore the reader's own layout after.
-      const filtering = Boolean(q || state.venue);
-      if (filtering && !savedOpen) {
-        savedOpen = new Map(Array.from(yearSections).map(s => [s, (s as HTMLDetailsElement).open]));
-      }
-      yearSections.forEach(section => {
-        const anyVisible = Array.from(section.querySelectorAll<HTMLLIElement>('.bib-item'))
-          .some(li => !li.hidden);
-        section.hidden = !anyVisible;
-        if (filtering) (section as HTMLDetailsElement).open = anyVisible;
-      });
-      if (!filtering && savedOpen) {
-        savedOpen.forEach((open, s) => { (s as HTMLDetailsElement).open = open; });
-        savedOpen = null;
-      }
-      syncToggle();
-
-      // Empty-state messaging
-      if (emptyMsg && emptyMsgText) {
-        if (visible === 0 && (state.venue || q)) {
-          let msg = 'No entries match this filter.';
-          if (q && state.venue) {
-            const activeBtn = document.querySelector<HTMLButtonElement>(`[data-venue="${state.venue}"]`);
-            const venueName = activeBtn?.querySelector('.venue-chip__name')?.textContent || state.venue;
-            msg = `No entries from ${venueName} matching "${q}".`;
-          } else if (q) {
-            msg = `No entries matching "${q}".`;
-          } else if (state.venue) {
-            const activeBtn = document.querySelector<HTMLButtonElement>(`[data-venue="${state.venue}"]`);
-            const venueName = activeBtn?.querySelector('.venue-chip__name')?.textContent || state.venue;
-            msg = `No entries from ${venueName} yet.`;
-          }
-          emptyMsgText.textContent = msg;
-          emptyMsg.hidden = false;
-        } else {
-          emptyMsg.hidden = true;
-        }
-      }
-
-      if (searchCount) {
-        if (q || state.venue) {
-          searchCount.textContent = `${visible} of ${items.length}`;
-          searchCount.hidden = false;
-        } else {
-          searchCount.hidden = true;
-        }
-      }
-      if (searchClear) searchClear.hidden = !q;
-      buttons.forEach(btn => {
-        const isActive = (btn.dataset.venue || '') === state.venue;
-        btn.classList.toggle('is-active', isActive);
-        btn.setAttribute('aria-pressed', String(isActive));
-      });
-
-      // URL sync — shareable filter state
-      const u = new URL(window.location.href);
-      state.venue ? u.searchParams.set('venue', state.venue) : u.searchParams.delete('venue');
-      q ? u.searchParams.set('q', q) : u.searchParams.delete('q');
-      window.history.replaceState(null, '', u.toString());
-    }
-
-    buttons.forEach(btn => {
-      btn.addEventListener('click', () => {
-        const v = btn.dataset.venue || '';
-        const isActive = btn.classList.contains('is-active');
-        state.venue = (isActive && v) ? '' : v;
-        applyFilters();
-      });
-    });
-
-    let searchTimer: number | undefined;
-    if (searchInput) {
-      searchInput.addEventListener('input', () => {
-        window.clearTimeout(searchTimer);
-        searchTimer = window.setTimeout(() => {
-          state.query = searchInput.value;
-          applyFilters();
-        }, 80);
-      });
-      searchInput.addEventListener('keydown', e => {
-        if (e.key === 'Escape' && searchInput.value) {
-          searchInput.value = '';
-          state.query = '';
-          applyFilters();
-        }
-      });
-    }
-    if (searchClear && searchInput) {
-      searchClear.addEventListener('click', () => {
-        searchInput.value = '';
-        state.query = '';
-        applyFilters();
-        searchInput.focus();
-      });
-    }
-
-    // Hydrate state from URL
-    const usp = new URLSearchParams(window.location.search);
-    const initialVenue = usp.get('venue') || '';
-    const initialQ = usp.get('q') || '';
-    if (initialVenue) state.venue = initialVenue;
-    if (initialQ) {
-      state.query = initialQ;
-      if (searchInput) searchInput.value = initialQ;
-    }
-    if (state.venue || state.query) applyFilters();
-    // Deep link to a year (#year-2024) opens it.
-    const target = location.hash.match(/^#year-(\d{4})$/);
-    if (target) {
-      const d = document.querySelector<HTMLDetailsElement>(`details[data-year="${target[1]}"]`);
-      if (d) { d.open = true; d.scrollIntoView(); }
-    }
-    syncToggle();
-  </script>
-
+  <Contact />
 </Base>

@@ -1,6 +1,15 @@
 # david-nyurenberg.com
 
-Single-page byline / publications site for David Nyurenberg.
+Personal site for David Nyurenberg.
+
+- `/`: positioning, the four arguments, work with outcomes, contact
+- `/ideas/<slug>/`: one page per argument, from `src/data/ideas.ts`
+- `/archive/`: every publication, searchable, from `src/data/publications.json`
+
+Every publication carries `themes` (`transparency`, `measurement`,
+`incentives`, `agentic`, `career`). Entries without a theme don't appear on
+the argument pages. `public/_redirects` sends the old `/future` preview URLs
+to their new homes.
 
 ## Stack
 

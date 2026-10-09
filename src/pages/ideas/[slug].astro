@@ -1,39 +1,47 @@
 ---
-import Base from '../../../layouts/Base.astro';
-import FutureNav from '../../../components/FutureNav.astro';
-import EvidenceItem from '../../../components/EvidenceItem.astro';
-import publications from '../../../data/publications.json';
-import { ideas, type Idea, type Theme } from '../../../data/ideas';
-import '../../../styles/future.css';
+import Base from '../../layouts/Base.astro';
+import FutureNav from '../../components/FutureNav.astro';
+import EvidenceItem from '../../components/EvidenceItem.astro';
+import Contact from '../../components/Contact.astro';
+import publications from '../../data/publications.json';
+import { ideas, type Idea, type Theme } from '../../data/ideas';
+import '../../styles/future.css';
 
 export function getStaticPaths() {
   return ideas.map(idea => ({ params: { slug: idea.slug }, props: { idea } }));
 }
 const { idea } = Astro.props as { idea: Idea };
 
-type Entry = { date: string; venue: string; title: string; type?: string; themes?: Theme[] };
+type Entry = { date: string; venue: string; title: string; type?: string; url?: string; themes?: Theme[] };
 // Oldest first: the trail shows how the argument developed.
 const trail = (publications as Entry[])
   .filter(e => e.themes?.includes(idea.theme))
   .sort((a, b) => a.date.localeCompare(b.date));
 const authored = trail.filter(e => e.type === 'Authored').length;
 const since = trail[0]?.date.slice(0, 4);
+const months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+const essentials = idea.essentials.map(x => {
+  const e = (publications as Entry[]).find(p => p.url === x.url);
+  if (!e) throw new Error(`essential not in publications.json: ${x.url}`);
+  const [y, m] = e.date.split('-');
+  return { ...x, e, when: m ? `${months[+m - 1]} ${y}` : y };
+});
 
 const idx = ideas.findIndex(i => i.slug === idea.slug);
 const next = ideas[(idx + 1) % ideas.length];
 const prev = ideas[(idx - 1 + ideas.length) % ideas.length];
 ---
-<Base title={idea.title.replace(/\.$/, '')} noindex description={idea.thesis}>
+<Base title={idea.title.replace(/\.$/, '')} description={idea.thesis}>
   <FutureNav current={idea.slug} />
 
   <header class={`ihero ihero--${idea.theme}`}>
     <div class="shell">
-      <a class="ihero__back" href="/future/">← Four arguments</a>
+      <a class="ihero__back" href="/">← Four arguments</a>
       <span class="ihero__num">{idea.num}</span>
       <h1 class="ihero__title">{idea.title}</h1>
       <p class="ihero__thesis">{idea.thesis}</p>
       <p class="ihero__stats">
-        <strong>{trail.length}</strong> pieces · <strong>{authored}</strong> authored · argued since <strong>{since}</strong>
+        <strong>{trail.length}</strong> pieces · <strong>{authored}</strong> authored · {idea.sinceNote ?? <>related work since <strong>{since}</strong></>}
       </p>
     </div>
   </header>
@@ -74,8 +82,23 @@ const prev = ideas[(idx - 1 + ideas.length) % ideas.length];
 
   <section class="fsection">
     <div class="shell">
+      <h2 class="fsection__label">Start here</h2>
+      <div class="essentials">
+        {essentials.map(x => (
+          <a class={`essential essential--${idea.theme}`} href={x.url} target="_blank" rel="noopener">
+            <span class="essential__role">{x.role}</span>
+            <span class="essential__title">{x.e.title}</span>
+            <span class="essential__meta">{x.e.type} · {x.e.venue} · {x.when} ↗</span>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="fsection">
+    <div class="shell">
       <div class="fsection__head">
-        <h2 class="fsection__label">The trail, oldest first</h2>
+        <h2 class="fsection__label">The full trail, oldest first</h2>
         <span class="fsection__more">{trail.length} pieces</span>
       </div>
       <ul class="evlist evlist--trail">
@@ -84,8 +107,10 @@ const prev = ideas[(idx - 1 + ideas.length) % ideas.length];
     </div>
   </section>
 
+  <Contact compact />
+
   <nav class="inext shell" aria-label="More arguments">
-    <a href={`/future/ideas/${prev.slug}/`}><span>← {prev.num}</span>{prev.title}</a>
-    <a href={`/future/ideas/${next.slug}/`} class="inext__next"><span>{next.num} →</span>{next.title}</a>
+    <a href={`/ideas/${prev.slug}/`}><span>← {prev.num}</span>{prev.title}</a>
+    <a href={`/ideas/${next.slug}/`} class="inext__next"><span>{next.num} →</span>{next.title}</a>
   </nav>
 </Base>

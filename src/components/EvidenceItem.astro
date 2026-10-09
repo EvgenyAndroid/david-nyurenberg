@@ -28,7 +28,7 @@ const tags = (e.themes || []).filter(t => t !== hideTheme && t !== 'career');
         {tags.map(t => {
           const idea = ideaFor(t);
           return idea
-            ? <a class={`tag tag--${t}`} href={`/future/ideas/${idea.slug}/`}>{themeLabels[t]}</a>
+            ? <a class={`tag tag--${t}`} href={`/ideas/${idea.slug}/`}>{themeLabels[t]}</a>
             : <span class={`tag tag--${t}`}>{themeLabels[t]}</span>;
         })}
       </div>
