@@ -305,7 +305,21 @@ a.tag:hover { background: var(--th); color: var(--paper); }
   color: #3a3a3a;
 }
 @media (max-width: 860px) {
-  .awards { grid-template-columns: 1fr; }
+  .awards { grid-template-columns: minmax(0, 1fr); }
+  .awards > * { min-width: 0; }
+  .awards__photos { justify-self: stretch; max-width: none; }
+}
+/* Phones: three prints share the row, smaller tilt, no sideways overflow */
+@media (max-width: 600px) {
+  .fsection--ink { overflow-x: clip; }
+  .awards { padding: 1.1rem; gap: 1.25rem; }
+  .awards__photos { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 0.6rem; }
+  .awards .shot { padding: 0.3rem 0.3rem 1.4rem; transform: rotate(-1.5deg); }
+  .awards .shot:nth-child(2) { transform: rotate(1.5deg) translateY(0.35rem); }
+  .awards .shot:nth-child(3) { transform: rotate(-1deg); }
+  .shot__cap { font-size: 0.7rem; bottom: 0.3rem; }
+  .proof__stats { gap: 0.5rem; }
+  .proof__stats dt { font-size: var(--t-xl); }
 }
 @media (prefers-reduced-motion: reduce) {
   .awards .shot, .awards .shot:nth-child(n) { transform: none; transition: none; }
@@ -355,3 +369,11 @@ a.tag:hover { background: var(--th); color: var(--paper); }
   .fnav__links a.fnav__cta { padding: 0.35rem 0.75rem; }
 }
 .contact__email { color: var(--ink-muted); font-weight: 500; border-bottom-color: var(--rule); margin-top: -0.4rem; }
+/* Smallest phones (≈320px): tighten the nav a little more */
+@media (max-width: 380px) {
+  .fnav__inner { gap: 0.5rem; }
+  .fnav__brand { font-size: 0.92rem; }
+  .fnav__links { gap: 0.55rem; }
+  .fnav__links a { font-size: 0.72rem; }
+  .fnav__links a.fnav__cta { padding: 0.32rem 0.6rem; }
+}
