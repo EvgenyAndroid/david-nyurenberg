@@ -38,7 +38,9 @@ const { idea } = Astro.props as { idea?: string };
       if (!a) return;
       var href = a.getAttribute('href') || '';
       var where = placeOf(a);
-      if (href.indexOf('mailto:') === 0) {
+      // Cloudflare's email obfuscation serves mailto links as
+      // /cdn-cgi/l/email-protection#… until its decoder rewrites them.
+      if (href.indexOf('mailto:') === 0 || href.indexOf('/cdn-cgi/l/email-protection') === 0) {
         gtag('event', 'contact_email', { location: where });
       } else if (/linkedin\.com\/in\/david-nyurenberg/.test(href)) {
         gtag('event', 'contact_linkedin', { location: where });
