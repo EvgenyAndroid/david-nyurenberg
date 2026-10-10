@@ -87,6 +87,17 @@ const venueCounts: Record<string, number> = {};
 all.forEach(e => {
   venueCounts[e.venue] = (venueCounts[e.venue] || 0) + 1;
 });
+// ─── Kind-of-piece groups for the second filter row ─────────────────────
+const groups = [
+  { key: 'authored', label: 'Written by David', types: ['Authored'] },
+  { key: 'press', label: 'In the press', types: ['Quoted', 'Feature', 'Interview', 'Mention'] },
+  { key: 'onair', label: 'On air & stage', types: ['Podcast', 'Panel', 'Video Interview'] },
+  { key: 'announce', label: 'Announcements', types: ['Press Release'] },
+];
+const groupOf = (type?: string) => groups.find(g => g.types.includes(type || ''))?.key || 'press';
+const groupCount = (key: string) => all.filter(e => groupOf(e.type) === key).length;
+const spokenCount = groupCount('onair');
+
 const venuesSortedByCount = Object.entries(venueCounts)
   .sort(([, a], [, b]) => b - a);
 
@@ -104,7 +115,7 @@ function yearSummary(year: string): string {
     .join(' · ');
 }
 const authoredCount = all.filter(e => e.type === 'Authored').length;
-const spokenCount = all.filter(e => ['Podcast', 'Panel', 'Video Interview', 'Interview'].includes(e.type || '')).length;
+
 const firstYear = years[years.length - 1];
 
 function formatDate(date: string): string {
@@ -187,6 +198,17 @@ function formatDate(date: string): string {
         </div>
 
         <!-- Venue filter chips -->
+        <div class="type-filter" role="group" aria-label="Filter by kind of piece" data-type-filter>
+          <button class="type-chip is-active" data-group="" aria-pressed="true" type="button">
+            All kinds <span class="type-chip__count" data-group-count="">{all.length}</span>
+          </button>
+          {groups.map(g => (
+            <button class="type-chip" data-group={g.key} aria-pressed="false" type="button">
+              {g.label} <span class="type-chip__count" data-group-count={g.key}>{groupCount(g.key)}</span>
+            </button>
+          ))}
+        </div>
+
         <div class="venue-filter" role="group" aria-label="Filter by publication" data-filter>
           <button class="venue-chip is-active" data-venue="" aria-pressed="true" type="button">
             <span class="venue-chip__name">All</span>
@@ -227,6 +249,7 @@ function formatDate(date: string): string {
                     class="bib-item"
                     data-venue={e.venue}
                     data-type={e.type || 'Other'}
+                    data-group={groupOf(e.type)}
                     data-search={haystack}
                   >
                     <a
@@ -295,7 +318,10 @@ function formatDate(date: string): string {
     const searchClear = document.querySelector<HTMLButtonElement>('[data-search-clear]');
     const searchCount = document.querySelector<HTMLElement>('[data-search-count]');
 
-    const state = { venue: '', query: '' };
+    const state = { venue: '', query: '', group: '' };
+    const typeButtons = document.querySelectorAll<HTMLButtonElement>('[data-type-filter] [data-group]');
+    const groupLabel = (key: string) =>
+      document.querySelector<HTMLButtonElement>(`[data-type-filter] [data-group="${key}"]`)?.firstChild?.textContent?.trim() || key;
     let savedOpen: Map<Element, boolean> | null = null;
 
     // ─── Expand / collapse all years ────────────────────────────────────
@@ -318,17 +344,34 @@ function formatDate(date: string): string {
       const q = state.query.trim().toLowerCase();
       let visible = 0;
 
+      // Group-button counts reflect the venue + search filters (not the group itself).
+      const groupTotals: Record<string, number> = { '': 0 };
       items.forEach(li => {
         const venueOk = !state.venue || li.dataset.venue === state.venue;
         const searchOk = !q || (li.dataset.search || '').includes(q);
-        const match = venueOk && searchOk;
+        const groupOk = !state.group || li.dataset.group === state.group;
+        if (venueOk && searchOk) {
+          groupTotals[''] += 1;
+          groupTotals[li.dataset.group || ''] = (groupTotals[li.dataset.group || ''] || 0) + 1;
+        }
+        const match = venueOk && searchOk && groupOk;
         li.hidden = !match;
         if (match) visible++;
+      });
+      document.querySelectorAll<HTMLElement>('[data-group-count]').forEach(el => {
+        const n = groupTotals[el.dataset.groupCount || ''] || 0;
+        el.textContent = String(n);
+        el.closest('button')?.classList.toggle('is-empty', n === 0);
+      });
+      typeButtons.forEach(btn => {
+        const isActive = (btn.dataset.group || '') === state.group;
+        btn.classList.toggle('is-active', isActive);
+        btn.setAttribute('aria-pressed', String(isActive));
       });
 
       // While filtering, open every year with a match so results are never
       // hidden inside a collapsed year; restore the reader's own layout after.
-      const filtering = Boolean(q || state.venue);
+      const filtering = Boolean(q || state.venue || state.group);
       if (filtering && !savedOpen) {
         savedOpen = new Map(Array.from(yearSections).map(s => [s, (s as HTMLDetailsElement).open]));
       }
@@ -362,19 +405,11 @@ function formatDate(date: string): string {
 
       // Empty-state messaging
       if (emptyMsg && emptyMsgText) {
-        if (visible === 0 && (state.venue || q)) {
-          let msg = 'No entries match this filter.';
-          if (q && state.venue) {
-            const activeBtn = document.querySelector<HTMLButtonElement>(`[data-venue="${state.venue}"]`);
-            const venueName = activeBtn?.querySelector('.venue-chip__name')?.textContent || state.venue;
-            msg = `No entries from ${venueName} matching "${q}".`;
-          } else if (q) {
-            msg = `No entries matching "${q}".`;
-          } else if (state.venue) {
-            const activeBtn = document.querySelector<HTMLButtonElement>(`[data-venue="${state.venue}"]`);
-            const venueName = activeBtn?.querySelector('.venue-chip__name')?.textContent || state.venue;
-            msg = `No entries from ${venueName} yet.`;
-          }
+        if (visible === 0 && filtering) {
+          const activeBtn = state.venue ? document.querySelector<HTMLButtonElement>(`[data-venue="${state.venue}"]`) : null;
+          const venueName = activeBtn?.querySelector('.venue-chip__name')?.textContent || state.venue;
+          const kind = state.group ? `“${groupLabel(state.group)}” entries` : 'entries';
+          const msg = `No ${kind}${state.venue ? ` from ${venueName}` : ''}${q ? ` matching "${q}"` : ''}.`;
           emptyMsgText.textContent = msg;
           emptyMsg.hidden = false;
         } else {
@@ -383,7 +418,7 @@ function formatDate(date: string): string {
       }
 
       if (searchCount) {
-        if (q || state.venue) {
+        if (filtering) {
           searchCount.textContent = `${visible} of ${items.length}`;
           searchCount.hidden = false;
         } else {
@@ -400,6 +435,7 @@ function formatDate(date: string): string {
       // URL sync — shareable filter state
       const u = new URL(window.location.href);
       state.venue ? u.searchParams.set('venue', state.venue) : u.searchParams.delete('venue');
+      state.group ? u.searchParams.set('type', state.group) : u.searchParams.delete('type');
       q ? u.searchParams.set('q', q) : u.searchParams.delete('q');
       window.history.replaceState(null, '', u.toString());
     }
@@ -409,6 +445,14 @@ function formatDate(date: string): string {
         const v = btn.dataset.venue || '';
         const isActive = btn.classList.contains('is-active');
         state.venue = (isActive && v) ? '' : v;
+        applyFilters();
+      });
+    });
+
+    typeButtons.forEach(btn => {
+      btn.addEventListener('click', () => {
+        const g = btn.dataset.group || '';
+        state.group = (state.group === g) ? '' : g;
         applyFilters();
       });
     });
@@ -444,11 +488,13 @@ function formatDate(date: string): string {
     const initialVenue = usp.get('venue') || '';
     const initialQ = usp.get('q') || '';
     if (initialVenue) state.venue = initialVenue;
+    const initialType = usp.get('type') || '';
+    if (initialType && document.querySelector(`[data-type-filter] [data-group="${initialType}"]`)) state.group = initialType;
     if (initialQ) {
       state.query = initialQ;
       if (searchInput) searchInput.value = initialQ;
     }
-    if (state.venue || state.query) applyFilters();
+    if (state.venue || state.query || state.group) applyFilters();
     // Deep link to a year (#year-2024) opens it.
     const target = location.hash.match(/^#year-(\d{4})$/);
     if (target) {
