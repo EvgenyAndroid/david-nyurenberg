@@ -705,3 +705,8 @@ main { display: block; }
   .search-row { flex-direction: column; align-items: stretch; }
   .search-wrap { min-width: 0; }
 }
+
+/* Smallest phones: keep the archive's "Nyurenberg." on screen */
+@media (max-width: 400px) {
+  .display { font-size: 2.6rem; }
+}
