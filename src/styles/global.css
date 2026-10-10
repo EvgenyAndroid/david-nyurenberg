@@ -626,9 +626,21 @@ main { display: block; }
 .footer__tagline { margin-bottom: 1rem; }
 .footer__copy {
   margin-top: 1rem;
+  padding-top: 1rem;
+  border-top: 1px solid var(--rule);
   font-size: var(--t-xs);
   color: var(--ink-light);
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 0.5rem 1.5rem;
 }
+.footer__credit a {
+  color: var(--ink-muted);
+  font-weight: 600;
+  border-bottom-color: var(--rule);
+}
+.footer__credit a:hover { color: var(--accent); border-bottom-color: var(--accent); }
 
 /* ─── Back-to-top (site-wide) ───────────────────────────────────────── */
 .to-top {

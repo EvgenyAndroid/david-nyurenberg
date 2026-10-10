@@ -69,7 +69,10 @@ const absoluteOgImage = new URL(ogImage, Astro.site).toString();
           <div class="footer__brand">David Nyurenberg</div>
           <div class="footer__tagline">Selected bylines and published work.</div>
           <div class="footer__copy">
-            © {new Date().getFullYear()} David Nyurenberg. All rights reserved.
+            <span>© {new Date().getFullYear()} David Nyurenberg. All rights reserved.</span>
+            <span class="footer__credit">
+              Developed by <a href="https://nofluffadvisory.com/" target="_blank" rel="noopener">No Fluff Advisory</a>
+            </span>
           </div>
         </div>
       </div>
