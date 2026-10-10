@@ -1,0 +1,50 @@
+---
+// GA4 for david-nyurenberg.com (its own property, separate from No Fluff's).
+// Loads only on the production host, so previews and local builds don't
+// count. Enhanced measurement covers page views, scrolls and outbound clicks;
+// the listener below adds the contact and download events GA4 can't infer.
+const GA_ID = 'G-6JKGR4SF3X';
+const { idea } = Astro.props as { idea?: string };
+---
+<script is:inline define:vars={{ GA_ID, idea }}>
+  (function () {
+    var host = location.hostname;
+    if (host !== 'david-nyurenberg.com' && host !== 'www.david-nyurenberg.com') return;
+
+    var s = document.createElement('script');
+    s.async = true;
+    s.src = 'https://www.googletagmanager.com/gtag/js?id=' + GA_ID;
+    document.head.appendChild(s);
+
+    window.dataLayer = window.dataLayer || [];
+    function gtag() { dataLayer.push(arguments); }
+    window.gtag = gtag;
+    gtag('js', new Date());
+    gtag('config', GA_ID);
+
+    if (idea) gtag('event', 'idea_view', { idea: idea });
+
+    // Where on the page a click came from: nav, contact block, archive, etc.
+    function placeOf(el) {
+      if (el.closest('.fnav')) return 'nav';
+      if (el.closest('.contact')) return 'contact';
+      if (el.closest('.fhero')) return 'hero';
+      if (el.closest('.linkedin-note')) return 'archive_note';
+      return 'page';
+    }
+
+    document.addEventListener('click', function (e) {
+      var a = e.target.closest && e.target.closest('a[href]');
+      if (!a) return;
+      var href = a.getAttribute('href') || '';
+      var where = placeOf(a);
+      if (href.indexOf('mailto:') === 0) {
+        gtag('event', 'contact_email', { location: where });
+      } else if (/linkedin\.com\/in\/david-nyurenberg/.test(href)) {
+        gtag('event', 'contact_linkedin', { location: where });
+      } else if (href.indexOf('/david-nyurenberg-headshot') === 0) {
+        gtag('event', 'headshot_download', { location: where });
+      }
+    }, true);
+  })();
+</script>

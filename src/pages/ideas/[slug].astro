@@ -32,7 +32,7 @@ const idx = ideas.findIndex(i => i.slug === idea.slug);
 const next = ideas[(idx + 1) % ideas.length];
 const prev = ideas[(idx - 1 + ideas.length) % ideas.length];
 ---
-<Base title={idea.title.replace(/\.$/, '')} description={idea.thesis}
+<Base title={idea.title.replace(/\.$/, '')} description={idea.thesis} idea={idea.slug}
   jsonLd={{ '@context': 'https://schema.org', '@graph': [
     { '@type': 'Article', headline: idea.title, description: idea.thesis,
       url: `${SITE}/ideas/${idea.slug}/`, mainEntityOfPage: `${SITE}/ideas/${idea.slug}/`,
