@@ -2,7 +2,7 @@
 // Every quote is verbatim from his own columns or interviews, and every
 // number is sourced to the piece it appeared in. The argument paragraphs
 // are written in David's first-person voice, built only from experiences
-// and positions he has already published. They need his sign-off.
+// and positions he has already published. Signed off by David, 2026-10-10.
 
 export type Theme = 'transparency' | 'measurement' | 'incentives' | 'agentic' | 'career';
 

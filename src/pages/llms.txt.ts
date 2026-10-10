@@ -2,7 +2,7 @@
 // (llmstxt.org). Generated from the same data as the pages, so it never drifts.
 import publications from '../data/publications.json';
 import { ideas, proof, awards } from '../data/ideas';
-import { SITE, LINKEDIN } from '../data/person';
+import { SITE, LINKEDIN, EMAIL } from '../data/person';
 
 export function GET() {
   const all = (publications as any[]).slice().sort((a, b) => b.date.localeCompare(a.date));
@@ -12,7 +12,7 @@ export function GET() {
     '',
     '> SVP, Digital at InterMedia Advertising. Media buyer and writer arguing that streaming TV (CTV) should be bought like television: by the show, for the household, with incentives in plain sight, and with AI agents that make operators sharper. His team won the 2026 AdExchanger Award for Most Innovative Use of CTV Technology.',
     '',
-    `Previously led video product development and innovation at Rain the Growth Agency, founded the consultancy Valor Digital, and began on the publisher side at Gameloft. Writes for AdExchanger. Contact: ${LINKEDIN}`,
+    `Previously led video product development and innovation at Rain the Growth Agency, founded the consultancy Valor Digital, and began on the publisher side at Gameloft. Writes for AdExchanger. Contact: ${EMAIL} or ${LINKEDIN}`,
     '',
     '## Arguments',
     '',

@@ -354,3 +354,4 @@ a.tag:hover { background: var(--th); color: var(--paper); }
   .fnav__links { gap: 0.75rem; }
   .fnav__links a.fnav__cta { padding: 0.35rem 0.75rem; }
 }
+.contact__email { color: var(--ink-muted); font-weight: 500; border-bottom-color: var(--rule); margin-top: -0.4rem; }

@@ -3,8 +3,8 @@
 // argument page. Bio facts come from his published press (InterMedia
 // appointment release, ADWEEK hire story, AdExchanger winners page).
 import { ideas } from '../data/ideas';
+import { EMAIL, LINKEDIN } from '../data/person';
 const { compact = false } = Astro.props as { compact?: boolean };
-const LINKEDIN = 'https://www.linkedin.com/in/david-nyurenberg-1b56578b/';
 ---
 <section class:list={['contact', { 'contact--compact': compact }]} id="contact">
   <div class="shell contact__grid">
@@ -25,7 +25,9 @@ const LINKEDIN = 'https://www.linkedin.com/in/david-nyurenberg-1b56578b/';
       </ul>
     </div>
     <div class="contact__actions">
-      <a class="fcta__btn" href={LINKEDIN} target="_blank" rel="noopener">Message on LinkedIn →</a>
+      <a class="fcta__btn" href={`mailto:${EMAIL}?subject=Speaking%20%2F%20press%20inquiry`}>Email David →</a>
+      <a class="contact__link contact__email" href={`mailto:${EMAIL}`}>{EMAIL}</a>
+      <a class="contact__link" href={LINKEDIN} target="_blank" rel="noopener">Message on LinkedIn ↗</a>
       {!compact && (
         <>
           <a class="contact__link" href="/david-nyurenberg-headshot.jpg" download>Download headshot (JPG) ↓</a>
